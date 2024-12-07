@@ -1,0 +1,442 @@
+[gd_scene load_steps=23 format=3 uid="uid://dwt8hh41wlhih"]
+
+[ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
+[ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/tram.gd" id="2_wopkb"]
+[ext_resource type="Texture2D" uid="uid://v5ao2pigmcb1" path="res://Assets/wagon.png" id="3_55qam"]
+[ext_resource type="PackedScene" uid="uid://ba63uummfjdfb" path="res://Scenes/brnak.tscn" id="4_r2iav"]
+
+[sub_resource type="Curve2D" id="Curve2D_ri0xk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -87, 542, 0, 0, 0, 0, -40, 532, 0, 0, 0, 0, 212, 439, 0, 0, 0, 0, 292, 421, 0, 0, 0, 0, 499, 427)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_ma3t8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 499, 427, -27.0138, 0.105112, 27.0138, -0.105112, 1031, 440, -30.7978, -0.105112, 30.7978, 0.105112, 1102, 425, 0, 0, 0, 0, 1144, 426, 0, 0, 0, 0, 1350, 428)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_dccwy"]
+_data = {
+"points": PackedVector2Array(-62.3661, -0.31498, 62.3661, 0.31498, 1350, 428, -19.6863, 8.66196, 19.6863, -8.66196, 1445, 418, -10.3943, 8.34698, 10.3943, -8.34698, 1519, 370, -19.2138, 15.434, 19.2138, -15.434, 1758, 171, -15.1191, 11.8118, 15.1191, -11.8118, 1821, 113, 0, 0, 0, 0, 2023, -48)
+}
+point_count = 6
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
+vertices = PackedVector2Array(1565.93, 371.797, 1746.82, 204.172, 1739.33, 243.828, 1578.39, 376.797, 247.812, 494.141, 247.211, 482.07, 762.883, 490.992, 762.883, 491, 763.781, 515.031, 1077.8, 548.328, 915.172, 533.359, 916.18, 511.18, 1003.32, 497.977, 1043.87, 511.5, 1076.24, 542.867, 818.383, 506.844, 816.367, 527.844, 796.773, 527.023, 1467, 512.859, 1467, 529.219, 1417.64, 532.008, 1434.24, 515.938, 1141.95, 546, 1244.26, 546, 1245.26, 561, 1362.45, 586.93, 1079.77, 583.047, 1101.78, 545, 1573.01, 401.523, 1561.85, 467.57, 1571.02, 477.844, 1566.55, 485.289, 1493.55, 495.156, 1500.36, 474.859, 1289, 523.781, 1356.53, 539.523, 1289, 561)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 4, 7), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(7, 15, 16, 17, 8), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24), PackedInt32Array(25, 26, 9, 27, 22, 24), PackedInt32Array(0, 3, 28), PackedInt32Array(29, 0, 28, 30, 31), PackedInt32Array(29, 31, 32, 33), PackedInt32Array(21, 33, 32, 18), PackedInt32Array(34, 21, 20, 35), PackedInt32Array(36, 34, 35, 25), PackedInt32Array(15, 7, 12, 11), PackedInt32Array(9, 14, 27), PackedInt32Array(36, 25, 24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1575, 479, 1577, 402, 1582, 379, 1743, 246, 1753, 193, 1562, 370, 1558, 464, 1499, 471, 1433, 512, 1285, 520, 1285, 557, 1249, 557, 1248, 542, 1142, 542, 1102, 541, 1078, 539, 1046, 508, 1004, 494, 763, 487, 243, 478, 244, 498, 763, 519, 796, 531, 820, 532, 822, 511, 912, 515, 911, 537, 1074, 552, 1076, 587, 1367, 591, 1361, 543, 1418, 536, 1471, 533, 1471, 515, 1495, 499, 1569, 489)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j1bqt"]
+vertices = PackedVector2Array(1263.03, 683.992, 844.852, 665.156, 844.156, 647.156, 1024.82, 654.148, 1065, 656.883, 309.406, 800.438, 298.742, 788.438, 627.312, 517.094, 618.5, 543.383, 1350.27, 658.992, 1435.65, 651.312, 1438.37, 667.578, 1360.63, 678.008, 1266.03, 663, 1065, 614.828, 1026.17, 623.156, 808.281, 604.008, 813.617, 614.977, 702.562, 640.531, 705.453, 624.594, 693.609, 593.023, 651.602, 576.32, 655.781, 518.992, 328.477, 843.406, 321.656, 835.461, 639.641, 568.492, 771.711, 523.859, 782.258, 574.883)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 0), PackedInt32Array(13, 9, 0), PackedInt32Array(4, 13, 0), PackedInt32Array(14, 4, 3, 15), PackedInt32Array(16, 14, 15, 17), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 19, 18, 21, 22), PackedInt32Array(23, 24, 25, 21), PackedInt32Array(26, 27, 20, 22), PackedInt32Array(22, 21, 25, 8, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1443, 671, 1361, 682, 1263, 688, 841, 669, 840, 643, 1021, 650, 1022, 627, 814, 619, 701, 645, 651, 582, 328, 849, 316, 835, 634, 568, 618, 549, 309, 806, 293, 788, 626, 513, 656, 515, 775, 520, 787, 578, 699, 596, 708, 620, 808, 600, 1069, 611, 1069, 653, 1266, 659, 1350, 655, 1439, 647)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xo2um"]
+vertices = PackedVector2Array(764.531, 724.781, 762.469, 706.867, 867.023, 704, 827.961, 721, 1274, 737.844, 1166.84, 720, 1274, 722.891)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5), PackedInt32Array(4, 5, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1278, 742, 828, 725, 761, 729, 758, 703, 867, 700, 1167, 716, 1278, 719)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_286rt"]
+vertices = PackedVector2Array(1375.86, 599, 1365.77, 547.562, 1431.47, 541.344, 1442.58, 639.477, 1380.49, 646.57, 1377.53, 621.852, 1345.87, 623.172, 1346.86, 653, 1221.94, 653, 1221.06, 598.828, 1263.97, 597, 1304.9, 599)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(6, 11, 0, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1447, 643, 1435, 537, 1361, 544, 1371, 595, 1305, 595, 1264, 593, 1217, 595, 1218, 657, 1264, 657, 1307, 657, 1351, 657, 1350, 627, 1374, 626, 1377, 651)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_caly8"]
+vertices = PackedVector2Array(1007.52, 320.648, 955.023, 117.453, 1000.01, 112.352, 1057.86, 329.773, 1073.37, 371.008, 1427.29, 358.109, 1434.63, 374.977, 1642.37, 211.328, 1628.38, 193.672)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(7, 6, 5, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1629, 188, 1648, 212, 1436, 379, 1072, 375, 1004, 323, 950, 114, 1003, 108, 1061, 326, 1426, 354)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_isvcn"]
+vertices = PackedVector2Array(1352.18, 394.977, 1352.78, 406.953, 1102, 404.039, 1102, 394.008)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1098, 390, 1098, 408, 1357, 411, 1356, 391)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nrvhs"]
+vertices = PackedVector2Array(1361, 496.406, 1361, 486.352, 1396.64, 489.32, 1392.06, 499.859, 1574.67, 385.609, 1399.33, 458.359, 1474.35, 422.352, 1366.83, 410, 1366.19, 396.102, 1401.27, 396.977, 1401.18, 410, 1399.83, 441.109, 1567.4, 372.391, 1364.16, 455.328, 1364.82, 440.109)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(4, 2, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(10, 9, 6), PackedInt32Array(11, 10, 6, 5), PackedInt32Array(6, 12, 4), PackedInt32Array(11, 5, 13, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1362, 392, 1363, 414, 1397, 414, 1396, 437, 1361, 436, 1360, 459, 1395, 462, 1393, 485, 1357, 482, 1357, 500, 1393, 504, 1580, 387, 1569, 367, 1474, 418, 1402, 393)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5m1py"]
+vertices = PackedVector2Array(1414.39, 309.672, 1428.22, 327.148, 1347.11, 383.844, 1328.55, 380.25, 1261.84, 540.867, 1261.17, 524, 1292.11, 524, 1294.13, 539.867, 1318.01, 559.219, 1312.08, 854.883, 1284.12, 854.109, 1341.04, 499.156)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 7), PackedInt32Array(11, 8, 7, 6, 3, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1415, 304, 1434, 328, 1351, 386, 1345, 500, 1322, 560, 1316, 859, 1280, 858, 1290, 544, 1258, 545, 1257, 520, 1289, 520, 1325, 378)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_oahux"]
+vertices = PackedVector2Array(1789.03, 270.242, 1804.55, 190.82, 1811.67, 197.438, 1798.97, 268.789, 1834.28, 391.078, 1839.56, 424.539, 1818.52, 433.547, 1795.95, 359.25, 1806.13, 366.953)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(3, 8, 7, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1816, 439, 1844, 427, 1838, 389, 1810, 365, 1803, 269, 1816, 196, 1802, 183, 1785, 270, 1792, 360)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_54rwp"]
+vertices = PackedVector2Array(981.547, 335.062, 1003.33, 342.32, 974.156, 399.727, 963.133, 391.281, 955.453, 405.969, 942.469, 397.023, 507.141, 388, 294.547, 372.992, 258.68, 380.008, 224.812, 359.648, 209.328, 363.562, 163.453, 283.68, 150.648, 294.469)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 8), PackedInt32Array(9, 7, 8, 10), PackedInt32Array(11, 9, 10, 12)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(979, 330, 1009, 340, 977, 403, 956, 410, 507, 392, 258, 384, 207, 367, 145, 294, 164, 278, 227, 356, 295, 369, 942, 393, 960, 388)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nerr0"]
+vertices = PackedVector2Array(412.117, 33.0312, 368.742, 176.453, 306.25, 171.93, 351.992, 23.2578)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(345, 12, 425, 25, 376, 187, 293, 181)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_74g3j"]
+vertices = PackedVector2Array(334.727, 261.922, 333.172, 286.102, 283.477, 303.594, 257.297, 287.219, 282.656, 261.023)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(251, 288, 281, 257, 339, 258, 337, 289, 283, 308)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_g5y6a"]
+vertices = PackedVector2Array(403.328, 270.422, 477.578, 279.258, 458.43, 313.391, 395.5, 318.383, 280.289, 345.867, 286.641, 340.148, 222.023, 315.078, 217.523, 324.641)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 5, 4, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(220, 310, 212, 327, 280, 350, 461, 317, 484, 276, 400, 266, 392, 315, 287, 336)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e0i0g"]
+vertices = PackedVector2Array(1519.58, -16, 1535.53, -16, 1507.56, 71.75, 1442.5, 154.172, 1532.34, 104.789, 1441.88, 193.789, 1681.02, -20.7734, 1698.62, -6.10938, 920.062, 81.1328, 724.672, 21.5391, 758.547, -47.1328, 793.422, -48.9062, 869.773, 27.4297, 975.5, 68.25, 1006.94, 101.109, 1012.7, -46.4062, 1046.64, -39.9375, 1004.76, 75.7188, 1249.34, 141.969, 1280.77, 170.062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 7, 5, 4), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(8, 12, 13, 14), PackedInt32Array(15, 16, 17, 13), PackedInt32Array(14, 13, 17, 18, 19), PackedInt32Array(19, 18, 3, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(756, -51, 719, 24, 919, 85, 1006, 105, 1280, 174, 1443, 198, 1705, -6, 1681, -26, 1533, 99, 1512, 71, 1541, -20, 1517, -20, 1440, 150, 1250, 138, 1010, 73, 1052, -43, 1010, -51, 973, 63, 872, 24, 795, -53)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wrgk1"]
+vertices = PackedVector2Array(1562.83, 904.773, 1519.16, 1003.26, 1439.06, 955.789, 1495.93, 868.961, 1282.26, 890.477, 1277.25, 976.57, 1153.22, 963.422, 1159.74, 858.117, 1312.91, 894.477, 1350.09, 1066.48, 1318.9, 1128, 1346.24, 1128)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(4, 7, 3, 8), PackedInt32Array(8, 3, 2, 9), PackedInt32Array(10, 8, 9, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1350, 1132, 1354, 1068, 1440, 961, 1521, 1009, 1568, 903, 1497, 865, 1156, 854, 1149, 967, 1281, 981, 1286, 895, 1309, 898, 1315, 1132)])
+agent_radius = 4.0
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="POI_KFC" type="Node2D" parent="."]
+position = Vector2(1080, 318)
+
+[node name="POI_Letmo" type="Node2D" parent="."]
+position = Vector2(1420, 317)
+
+[node name="POI_Saliny1" type="Node2D" parent="."]
+position = Vector2(1335, 401)
+
+[node name="POI_Saliny2" type="Node2D" parent="."]
+position = Vector2(1335, 445)
+
+[node name="POI_Saliny3" type="Node2D" parent="."]
+position = Vector2(1337, 490)
+
+[node name="POI_Natupiste5" type="Node2D" parent="."]
+position = Vector2(584, 623)
+
+[node name="POI_Natupiste6" type="Node2D" parent="."]
+position = Vector2(554, 585)
+
+[node name="POI_Natupiste2" type="Node2D" parent="."]
+position = Vector2(1093, 721)
+
+[node name="POI_Dornych" type="Node2D" parent="."]
+position = Vector2(1256, 976)
+
+[node name="POI_Vankovka" type="Node2D" parent="."]
+position = Vector2(1338, 1128)
+
+[node name="POI_Petrov1" type="Node2D" parent="."]
+position = Vector2(365, 111)
+
+[node name="UnderlyingPhoto" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="BrnoGoogleEarth2" type="Sprite2D" parent="UnderlyingPhoto"]
+position = Vector2(1085, 536)
+scale = Vector2(1.22029, 1.22029)
+texture = ExtResource("1_42f77")
+
+[node name="T1_Hybesova-NoveSady" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ri0xk")
+
+[node name="T1_NoveSady-Nadrazi" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ma3t8")
+
+[node name="T1_Nadrazi-Malinak" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dccwy")
+
+[node name="Tram" type="PathFollow2D" parent="." node_paths=PackedStringArray("tracks")]
+position = Vector2(-87, 542)
+rotation = -0.20964
+script = ExtResource("2_wopkb")
+tracks = [NodePath("../T1_Hybesova-NoveSady"), NodePath("../T1_NoveSady-Nadrazi"), NodePath("../T1_Nadrazi-Malinak")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Tram"]
+position = Vector2(15, 11)
+scale = Vector2(1, 0.58)
+texture = ExtResource("3_55qam")
+
+[node name="JdeNaDornych" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+modulate = Color(1, 0.0627451, 0.129412, 1)
+position = Vector2(998, 777)
+goal = NodePath("../POI_Dornych")
+
+[node name="JdeNaDornych2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+modulate = Color(1, 0.0627451, 0.129412, 1)
+position = Vector2(1492, 115)
+goal = NodePath("../POI_Dornych")
+
+[node name="JdeDoVankovky3" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+modulate = Color(1, 0.0627451, 0.129412, 1)
+position = Vector2(1015, 720)
+goal = NodePath("../POI_Vankovka")
+
+[node name="JdeNaPeron2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+modulate = Color(0.363388, 0.651955, 0.794563, 1)
+position = Vector2(1295, 765)
+goal = NodePath("../POI_Natupiste2")
+
+[node name="JdeNaPetrov1" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+modulate = Color(1, 0.0627451, 0.129412, 1)
+position = Vector2(247, 372)
+goal = NodePath("../POI_Petrov1")
+
+[node name="Links" type="Node2D" parent="."]
+
+[node name="MysiDira_Ulice_Schody" type="NavigationLink2D" parent="Links"]
+position = Vector2(1266, 574)
+navigation_layers = 3
+start_position = Vector2(1, -38)
+
+[node name="MysiDira_Hlavas" type="NavigationLink2D" parent="Links"]
+position = Vector2(1275, 645)
+navigation_layers = 3
+start_position = Vector2(23, 1)
+
+[node name="MysiDira_Nastupiste1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1281, 676)
+navigation_layers = 3
+start_position = Vector2(16, 10)
+
+[node name="MysiDira_Nastupiste2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1266, 731)
+navigation_layers = 3
+start_position = Vector2(35, 1)
+
+[node name="MysiDira_Nastupiste3" type="NavigationLink2D" parent="Links"]
+position = Vector2(1264, 790)
+navigation_layers = 3
+start_position = Vector2(35, -2)
+
+[node name="Link_Hlavas_Ulice1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1401, 552)
+start_position = Vector2(-6, -25)
+
+[node name="Link_Hlavas_Ulice2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1282, 609)
+start_position = Vector2(-0.34, -28.01)
+
+[node name="Link_Nastupiste_Ulice3" type="NavigationLink2D" parent="Links"]
+position = Vector2(748, 545)
+start_position = Vector2(40, -40)
+
+[node name="Link_Nastupiste_Ulice4" type="NavigationLink2D" parent="Links"]
+position = Vector2(644, 529)
+start_position = Vector2(-1, -26)
+
+[node name="Link_Hlavas_Nastupiste1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1419, 660)
+start_position = Vector2(-6, -25)
+
+[node name="Link_Hlavas_Nastupiste2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1284, 670)
+start_position = Vector2(-1, -26)
+
+[node name="Megaprechod_1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1142, 557)
+start_position = Vector2(-1, -67)
+
+[node name="Megaprechod_2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1142, 488)
+start_position = Vector2(-2, -43)
+end_position = Vector2(-1, -2)
+
+[node name="Megaprechod_3" type="NavigationLink2D" parent="Links"]
+position = Vector2(1142, 437)
+start_position = Vector2(-1, -36)
+end_position = Vector2(0, 8)
+
+[node name="Megaprechod_4" type="NavigationLink2D" parent="Links"]
+position = Vector2(1142, 402)
+start_position = Vector2(-1, -41)
+end_position = Vector2(-1, -2)
+
+[node name="Megaprechod_5" type="NavigationLink2D" parent="Links"]
+position = Vector2(1126, 403)
+start_position = Vector2(-1, -41)
+end_position = Vector2(0, 42)
+
+[node name="Megaprechod_6" type="NavigationLink2D" parent="Links"]
+position = Vector2(1128, 484)
+start_position = Vector2(-2, -36)
+end_position = Vector2(-1, 71)
+
+[node name="Megaprechod_7" type="NavigationLink2D" parent="Links"]
+position = Vector2(1116, 483)
+start_position = Vector2(-3, -122)
+end_position = Vector2(-4, 70)
+
+[node name="MysiDira_Saliny_Schody1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1379, 401)
+navigation_layers = 3
+end_position = Vector2(-26, 0)
+
+[node name="MysiDira_Saliny_Schody2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1374, 448)
+navigation_layers = 3
+end_position = Vector2(-21, 0)
+
+[node name="MysiDira_Saliny_Schody3" type="NavigationLink2D" parent="Links"]
+position = Vector2(1373, 490)
+navigation_layers = 3
+start_position = Vector2(0, 3)
+end_position = Vector2(-21, 0)
+
+[node name="MysiDira_Saliny_Schody4" type="NavigationLink2D" parent="Links"]
+position = Vector2(1558, 384)
+navigation_layers = 3
+end_position = Vector2(20, -13)
+
+[node name="MysiDira_Spoj1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1406, 427)
+navigation_layers = 2
+end_position = Vector2(-67, -1)
+
+[node name="MysiDira_Spoj2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1404, 473)
+navigation_layers = 2
+end_position = Vector2(-68, -1)
+
+[node name="Saliny_Bokem_Letmo" type="NavigationLink2D" parent="Links"]
+position = Vector2(1655, 303)
+end_position = Vector2(-51, -70)
+
+[node name="Saliny_Bokem_prechod" type="NavigationLink2D" parent="Links"]
+position = Vector2(1733, 232)
+end_position = Vector2(65, 11)
+
+[node name="NoveSady_KFC" type="NavigationLink2D" parent="Links"]
+position = Vector2(988, 349)
+start_position = Vector2(65, -16)
+
+[node name="Petrov_Schody1" type="NavigationLink2D" parent="Links"]
+position = Vector2(162, 295)
+end_position = Vector2(106, -8)
+
+[node name="Petrov_Schody2" type="NavigationLink2D" parent="Links"]
+position = Vector2(315, 270)
+end_position = Vector2(36, -105)
+
+[node name="Basty_NoveSady" type="NavigationLink2D" parent="Links"]
+position = Vector2(446, 292)
+end_position = Vector2(533, 65)
+
+[node name="MysiDira_Dornych1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1290, 838)
+navigation_layers = 3
+end_position = Vector2(0, 36.86)
+
+[node name="MysiDira_Dornych2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1306, 839)
+navigation_layers = 3
+end_position = Vector2(0, 36.86)
+
+[node name="Hlavas_Centrum" type="NavigationLink2D" parent="Links"]
+position = Vector2(992, 122)
+end_position = Vector2(10, -35)
+
+[node name="Hlavas_Centrum2" type="NavigationLink2D" parent="Links"]
+position = Vector2(968, 122)
+end_position = Vector2(-7, -41)
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="Hlavas_Chodnik" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_gwhlx")
+use_edge_connections = false
+
+[node name="Nastupiste1" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_j1bqt")
+use_edge_connections = false
+
+[node name="Nastupiste2" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_xo2um")
+use_edge_connections = false
+
+[node name="Nastupiste3" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(3, 58)
+navigation_polygon = SubResource("NavigationPolygon_xo2um")
+use_edge_connections = false
+
+[node name="Hlavas-budova" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_286rt")
+use_edge_connections = false
+
+[node name="ChodnikNaproti" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_caly8")
+use_edge_connections = false
+
+[node name="Saliny1" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(8, 0)
+navigation_polygon = SubResource("NavigationPolygon_isvcn")
+use_edge_connections = false
+
+[node name="Saliny2" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(8, 47)
+navigation_polygon = SubResource("NavigationPolygon_isvcn")
+use_edge_connections = false
+
+[node name="Saliny3" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(4, 89)
+navigation_polygon = SubResource("NavigationPolygon_isvcn")
+use_edge_connections = false
+
+[node name="MysiDira_Saliny" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_nrvhs")
+use_edge_connections = false
+navigation_layers = 2
+
+[node name="MysiDira_Main" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_5m1py")
+use_edge_connections = false
+navigation_layers = 2
+
+[node name="Saliny_Bokem" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_oahux")
+use_edge_connections = false
+
+[node name="NoveSady_Chodnik" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_54rwp")
+use_edge_connections = false
+
+[node name="Petrov_Park_1" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_nerr0")
+use_edge_connections = false
+
+[node name="Petrov_Podesta" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_74g3j")
+use_edge_connections = false
+
+[node name="Basty" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_g5y6a")
+use_edge_connections = false
+
+[node name="UliceZaLetmem" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_e0i0g")
+use_edge_connections = false
+
+[node name="Dornych" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_wrgk1")
+use_edge_connections = false
