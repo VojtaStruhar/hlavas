@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/tram.gd" id="2_wopkb"]
 [ext_resource type="Texture2D" uid="uid://v5ao2pigmcb1" path="res://Assets/wagon.png" id="3_55qam"]
-[ext_resource type="PackedScene" uid="uid://ba63uummfjdfb" path="res://Scenes/brnak.tscn" id="4_r2iav"]
 
 [sub_resource type="Curve2D" id="Curve2D_ri0xk"]
 _data = {
@@ -72,10 +71,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1415, 304, 1434, 328, 1
 agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_oahux"]
-vertices = PackedVector2Array(1789.03, 270.242, 1804.55, 190.82, 1811.67, 197.438, 1798.97, 268.789, 1834.28, 391.078, 1839.56, 424.539, 1818.52, 433.547, 1795.95, 359.25, 1806.13, 366.953)
+vertices = PackedVector2Array(1787.01, 270.109, 1803.26, 186.906, 1813.83, 196.719, 1800.99, 268.898, 1836.13, 390.031, 1841.77, 425.773, 1817.26, 436.281, 1793.97, 359.617, 1808.07, 365.977)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(3, 8, 7, 0)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1816, 439, 1844, 427, 1838, 389, 1810, 365, 1803, 269, 1816, 196, 1802, 183, 1785, 270, 1792, 360)])
-agent_radius = 4.0
+agent_radius = 2.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_54rwp"]
 vertices = PackedVector2Array(981.547, 335.062, 1003.33, 342.32, 974.156, 399.727, 963.133, 391.281, 955.453, 405.969, 942.469, 397.023, 507.141, 388, 294.547, 372.992, 258.68, 380.008, 224.812, 359.648, 209.328, 363.562, 163.453, 283.68, 150.648, 294.469)
@@ -124,43 +123,13 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1243, 797, 1268, 796, 1270, 687, 1245, 687)])
 agent_radius = 4.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_21xkr"]
+vertices = PackedVector2Array(1607, 402.117, 1607, 390.109, 1732.96, 397.109, 1749.92, 411.844, 1746.05, 291.867, 1734.96, 291.133)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1605, 388, 1605, 404, 1752, 414, 1748, 290, 1733, 289, 1731, 395)])
+agent_radius = 2.0
+
 [node name="Main" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-
-[node name="POI_KFC" type="Node2D" parent="."]
-position = Vector2(1080, 318)
-
-[node name="POI_Letmo" type="Node2D" parent="."]
-position = Vector2(1420, 317)
-
-[node name="POI_Saliny1" type="Node2D" parent="."]
-position = Vector2(1335, 401)
-
-[node name="POI_Saliny2" type="Node2D" parent="."]
-position = Vector2(1335, 445)
-
-[node name="POI_Saliny3" type="Node2D" parent="."]
-position = Vector2(1337, 490)
-
-[node name="POI_Natupiste5" type="Node2D" parent="."]
-position = Vector2(584, 623)
-
-[node name="POI_Natupiste6" type="Node2D" parent="."]
-position = Vector2(554, 585)
-
-[node name="POI_Natupiste2" type="Node2D" parent="."]
-position = Vector2(1093, 721)
-
-[node name="POI_Dornych" type="Node2D" parent="."]
-position = Vector2(1256, 976)
-
-[node name="POI_Vankovka" type="Node2D" parent="."]
-position = Vector2(1338, 1128)
-
-[node name="POI_Petrov1" type="Node2D" parent="."]
-position = Vector2(365, 111)
 
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -169,6 +138,9 @@ metadata/_edit_group_ = true
 position = Vector2(1085, 536)
 scale = Vector2(1.22029, 1.22029)
 texture = ExtResource("1_42f77")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [node name="T1_Hybesova-NoveSady" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ri0xk")
@@ -189,31 +161,6 @@ tracks = [NodePath("../T1_Hybesova-NoveSady"), NodePath("../T1_NoveSady-Nadrazi"
 position = Vector2(15, 11)
 scale = Vector2(1, 0.58)
 texture = ExtResource("3_55qam")
-
-[node name="JdeNaDornych" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
-modulate = Color(1, 0.0627451, 0.129412, 1)
-position = Vector2(998, 777)
-goal = NodePath("../POI_Dornych")
-
-[node name="JdeNaVankovku2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
-modulate = Color(1, 0.0627451, 0.129412, 1)
-position = Vector2(1456, 517)
-goal = NodePath("../POI_Vankovka")
-
-[node name="JdeDoVankovky3" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
-modulate = Color(1, 0.0627451, 0.129412, 1)
-position = Vector2(1015, 720)
-goal = NodePath("../POI_Vankovka")
-
-[node name="JdeNaPeron2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
-modulate = Color(0.363388, 0.651955, 0.794563, 1)
-position = Vector2(1295, 765)
-goal = NodePath("../POI_Natupiste2")
-
-[node name="JdeNaPetrov1" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
-modulate = Color(1, 0.0627451, 0.129412, 1)
-position = Vector2(247, 372)
-goal = NodePath("../POI_Petrov1")
 
 [node name="Links" type="Node2D" parent="."]
 
@@ -269,21 +216,25 @@ start_position = Vector2(-1, -26)
 [node name="Megaprechod_1" type="NavigationLink2D" parent="Links"]
 position = Vector2(1142, 557)
 start_position = Vector2(-1, -67)
+travel_cost = 1.5
 
 [node name="Megaprechod_2" type="NavigationLink2D" parent="Links"]
 position = Vector2(1142, 488)
 start_position = Vector2(-2, -43)
 end_position = Vector2(-1, -2)
+travel_cost = 1.5
 
 [node name="Megaprechod_3" type="NavigationLink2D" parent="Links"]
 position = Vector2(1142, 437)
 start_position = Vector2(-1, -36)
 end_position = Vector2(0, 8)
+travel_cost = 1.5
 
 [node name="Megaprechod_4" type="NavigationLink2D" parent="Links"]
 position = Vector2(1142, 402)
 start_position = Vector2(-1, -41)
 end_position = Vector2(-1, -2)
+travel_cost = 1.5
 
 [node name="Megaprechod_5" type="NavigationLink2D" parent="Links"]
 position = Vector2(1126, 403)
@@ -340,17 +291,31 @@ end_position = Vector2(-39, 0)
 position = Vector2(1655, 303)
 end_position = Vector2(-51, -70)
 
+[node name="Schody_Letmo_Vedle" type="NavigationLink2D" parent="Links"]
+position = Vector2(1598, 224)
+end_position = Vector2(-75, -101)
+
+[node name="Schody_Letmo_Nahoru" type="NavigationLink2D" parent="Links"]
+position = Vector2(1412, 325)
+navigation_layers = 3
+end_position = Vector2(37, 29)
+
+[node name="Schody_Letmo_Nahoru2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1412, 325)
+navigation_layers = 3
+end_position = Vector2(-22, -147)
+
 [node name="Saliny_Bokem_prechod" type="NavigationLink2D" parent="Links"]
 position = Vector2(1733, 232)
 end_position = Vector2(65, 11)
 
 [node name="NoveSady_KFC" type="NavigationLink2D" parent="Links"]
 position = Vector2(988, 349)
-start_position = Vector2(65, -16)
+start_position = Vector2(62, -11)
 
 [node name="Petrov_Schody1" type="NavigationLink2D" parent="Links"]
 position = Vector2(162, 295)
-end_position = Vector2(106, -8)
+end_position = Vector2(63, 27)
 
 [node name="Petrov_Schody2" type="NavigationLink2D" parent="Links"]
 position = Vector2(315, 270)
@@ -397,6 +362,18 @@ start_position = Vector2(-6, 86)
 position = Vector2(1406, 681)
 navigation_layers = 3
 start_position = Vector2(2, -78)
+
+[node name="Basta_Petrov" type="NavigationLink2D" parent="Links"]
+position = Vector2(411, 285)
+end_position = Vector2(-85, -11)
+
+[node name="Bokem_Prechod1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1613, 397)
+end_position = Vector2(-30, -32)
+
+[node name="Bokem_Prechod2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1741, 297)
+end_position = Vector2(-9, -56)
 
 [node name="Navigation" type="Node2D" parent="."]
 
@@ -485,4 +462,8 @@ navigation_layers = 2
 
 [node name="MysiDira_Chodba" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_kry3j")
+use_edge_connections = false
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_21xkr")
 use_edge_connections = false
