@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=25 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/tram.gd" id="2_wopkb"]
@@ -36,9 +36,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1443, 671, 1361, 682, 1
 agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xo2um"]
-vertices = PackedVector2Array(764.531, 724.781, 762.469, 706.867, 867.023, 704, 827.961, 721, 1274, 737.844, 1166.84, 720, 1274, 722.891)
+vertices = PackedVector2Array(764.531, 724.781, 762.469, 706.867, 867.023, 704, 827.969, 720.992, 1225.81, 737.812, 1166.83, 720, 1225.15, 721.883)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5), PackedInt32Array(4, 5, 6)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1278, 742, 828, 725, 761, 729, 758, 703, 867, 700, 1167, 716, 1278, 719)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1230, 742, 828, 725, 761, 729, 758, 703, 867, 700, 1167, 716, 1229, 718)])
 agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_286rt"]
@@ -112,6 +112,18 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(1350, 1132, 1354, 1068, 1440, 961, 1521, 1009, 1568, 903, 1497, 865, 1156, 854, 1149, 967, 1281, 981, 1286, 895, 1309, 898, 1315, 1132)])
 agent_radius = 4.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jjvhh"]
+vertices = PackedVector2Array(1408.13, 792, 1394.19, 792, 1402.83, 597, 1414.86, 597)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1399, 593, 1419, 593, 1412, 796, 1390, 796)])
+agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kry3j"]
+vertices = PackedVector2Array(1264.06, 792.148, 1247.07, 792.828, 1248.93, 691, 1265.93, 691)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1243, 797, 1268, 796, 1270, 687, 1245, 687)])
+agent_radius = 4.0
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -183,10 +195,10 @@ modulate = Color(1, 0.0627451, 0.129412, 1)
 position = Vector2(998, 777)
 goal = NodePath("../POI_Dornych")
 
-[node name="JdeNaDornych2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
+[node name="JdeNaVankovku2" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
 modulate = Color(1, 0.0627451, 0.129412, 1)
-position = Vector2(1492, 115)
-goal = NodePath("../POI_Dornych")
+position = Vector2(1456, 517)
+goal = NodePath("../POI_Vankovka")
 
 [node name="JdeDoVankovky3" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("4_r2iav")]
 modulate = Color(1, 0.0627451, 0.129412, 1)
@@ -211,9 +223,9 @@ navigation_layers = 3
 start_position = Vector2(1, -38)
 
 [node name="MysiDira_Hlavas" type="NavigationLink2D" parent="Links"]
-position = Vector2(1275, 645)
+position = Vector2(1258, 696)
 navigation_layers = 3
-start_position = Vector2(23, 1)
+start_position = Vector2(0, -49)
 
 [node name="MysiDira_Nastupiste1" type="NavigationLink2D" parent="Links"]
 position = Vector2(1281, 676)
@@ -221,12 +233,12 @@ navigation_layers = 3
 start_position = Vector2(16, 10)
 
 [node name="MysiDira_Nastupiste2" type="NavigationLink2D" parent="Links"]
-position = Vector2(1266, 731)
+position = Vector2(1223, 728)
 navigation_layers = 3
 start_position = Vector2(35, 1)
 
 [node name="MysiDira_Nastupiste3" type="NavigationLink2D" parent="Links"]
-position = Vector2(1264, 790)
+position = Vector2(1221, 787)
 navigation_layers = 3
 start_position = Vector2(35, -2)
 
@@ -250,7 +262,7 @@ start_position = Vector2(-1, -26)
 position = Vector2(1419, 660)
 start_position = Vector2(-6, -25)
 
-[node name="Link_Hlavas_Nastupiste2" type="NavigationLink2D" parent="Links"]
+[node name="Link_Hlavas_Nastupiste_Bokem" type="NavigationLink2D" parent="Links"]
 position = Vector2(1284, 670)
 start_position = Vector2(-1, -26)
 
@@ -319,6 +331,11 @@ position = Vector2(1404, 473)
 navigation_layers = 2
 end_position = Vector2(-68, -1)
 
+[node name="MysiDira_Spoj3" type="NavigationLink2D" parent="Links"]
+position = Vector2(1297, 697)
+navigation_layers = 2
+end_position = Vector2(-39, 0)
+
 [node name="Saliny_Bokem_Letmo" type="NavigationLink2D" parent="Links"]
 position = Vector2(1655, 303)
 end_position = Vector2(-51, -70)
@@ -360,6 +377,26 @@ end_position = Vector2(10, -35)
 [node name="Hlavas_Centrum2" type="NavigationLink2D" parent="Links"]
 position = Vector2(968, 122)
 end_position = Vector2(-7, -41)
+
+[node name="Podchod_Nastupiste1" type="NavigationLink2D" parent="Links"]
+position = Vector2(1404, 723)
+navigation_layers = 3
+start_position = Vector2(-180, 6)
+
+[node name="Podchod_Nastupiste2" type="NavigationLink2D" parent="Links"]
+position = Vector2(1403, 772)
+navigation_layers = 3
+start_position = Vector2(-186, 15)
+
+[node name="Podchod_Dornych" type="NavigationLink2D" parent="Links"]
+position = Vector2(1402, 785)
+navigation_layers = 3
+start_position = Vector2(-6, 86)
+
+[node name="Podchod_Hlavas" type="NavigationLink2D" parent="Links"]
+position = Vector2(1406, 681)
+navigation_layers = 3
+start_position = Vector2(2, -78)
 
 [node name="Navigation" type="Node2D" parent="."]
 
@@ -439,4 +476,13 @@ use_edge_connections = false
 
 [node name="Dornych" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_wrgk1")
+use_edge_connections = false
+
+[node name="Podchod" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_jjvhh")
+use_edge_connections = false
+navigation_layers = 2
+
+[node name="MysiDira_Chodba" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_kry3j")
 use_edge_connections = false
