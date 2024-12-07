@@ -1,8 +1,8 @@
-extends Node2D
+@icon("res://Assets/guy_icon.png")
+class_name Brnak extends Node2D
 
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
-@export var goal: Node2D
-
+var goal: Node2D
 
 var SPEED = 20
 
@@ -10,8 +10,10 @@ var SPEED = 20
 func _ready() -> void:
 	SPEED += randi_range(-3, 3)
 	
-	agent.target_reached.connect(on_arrive)
-	agent.link_reached.connect(func(data): print(name, " reached a link: ", data.owner.name))
+	goal = PlacesManager.places.pick_random()
+	print("Heading to ", goal.name)
+	
+	agent.navigation_finished.connect(on_arrive)
 	
 	if goal:
 		start.call_deferred()

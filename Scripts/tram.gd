@@ -1,3 +1,4 @@
+@icon("res://Assets/tram_icon.png")
 extends PathFollow2D
 
 

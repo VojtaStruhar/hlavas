@@ -1,22 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba63uummfjdfb"]
+[gd_scene load_steps=4 format=3 uid="uid://ba63uummfjdfb"]
 
 [ext_resource type="Script" uid="uid://cir6xy104sghk" path="res://Scripts/brnak.gd" id="1_5sujq"]
 [ext_resource type="Texture2D" uid="uid://jjusgbygssw8" path="res://Assets/person.png" id="2_lpub6"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sutl6"]
+radius = 5.0
+
 [node name="Brnak" type="Node2D"]
-position = Vector2(1389, 611)
 script = ExtResource("1_5sujq")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 navigation_layers = 3
 avoidance_enabled = true
-neighbor_distance = 50.0
+radius = 8.0
+neighbor_distance = 20.0
 max_neighbors = 6
-debug_enabled = true
-debug_path_custom_point_size = 10.0
-debug_path_custom_line_width = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_lpub6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sutl6")

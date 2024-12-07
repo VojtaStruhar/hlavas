@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfrdvxst7bm3f"]
+
+[ext_resource type="Script" uid="uid://cd5vcp71kp6dm" path="res://Scripts/point_of_interest.gd" id="1_eses7"]
+
+[node name="PointOfInterest" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_eses7")
+
+[node name="ReleaseTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
