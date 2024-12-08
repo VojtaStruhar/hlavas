@@ -711,6 +711,8 @@ use_edge_connections = false
 
 [node name="KFC" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1061, 327)
+weight = 12
+visitor_color = Color(1, 0.141176, 0.337255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/KFC"]
 shape = SubResource("CircleShape2D_21xkr")
@@ -718,8 +720,40 @@ shape = SubResource("CircleShape2D_21xkr")
 [node name="ExitDoor" parent="Shops/KFC" instance=ExtResource("5_kry3j")]
 position = Vector2(-4, 4)
 
+[node name="Kebab" parent="Shops" instance=ExtResource("4_jjvhh")]
+position = Vector2(1426, 353)
+weight = 6
+visitor_color = Color(1, 0.141176, 0.337255, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Kebab"]
+shape = SubResource("CircleShape2D_21xkr")
+
+[node name="ExitDoor" parent="Shops/Kebab" instance=ExtResource("5_kry3j")]
+position = Vector2(8, 2)
+
+[node name="Burgr" parent="Shops" instance=ExtResource("4_jjvhh")]
+position = Vector2(669, 550)
+weight = 6
+visitor_color = Color(1, 0.141176, 0.337255, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Burgr"]
+shape = SubResource("CircleShape2D_21xkr")
+
+[node name="ExitDoor" parent="Shops/Burgr" instance=ExtResource("5_kry3j")]
+position = Vector2(5, -3)
+
+[node name="ExitDoor2" parent="Shops/Burgr" instance=ExtResource("5_kry3j")]
+position = Vector2(-8, 5)
+
+[node name="ExitDoor3" parent="Shops/Burgr" instance=ExtResource("5_kry3j")]
+position = Vector2(-7, -8)
+
+[node name="ExitDoor4" parent="Shops/Burgr" instance=ExtResource("5_kry3j")]
+position = Vector2(5, 9)
+
 [node name="McDonalds" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(955, 130)
+visitor_color = Color(1, 0.141176, 0.337255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/McDonalds"]
 shape = SubResource("CircleShape2D_fdnlq")
@@ -729,7 +763,8 @@ position = Vector2(1, -2)
 
 [node name="Dornych" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1256, 971)
-weight = 15
+weight = 20
+visitor_color = Color(0.47975, 0.619264, 0.954903, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Dornych"]
 shape = SubResource("CircleShape2D_kry3j")
@@ -745,7 +780,8 @@ position = Vector2(18, 1)
 
 [node name="Vankovka" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1332, 1127)
-weight = 20
+weight = 30
+visitor_color = Color(0.47975, 0.619264, 0.954903, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Vankovka"]
 shape = SubResource("CircleShape2D_6bp64")
@@ -755,6 +791,7 @@ shape = SubResource("CircleShape2D_6bp64")
 [node name="VankovkaSpodem" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(594, 1125)
 weight = 5
+visitor_color = Color(0.47975, 0.619264, 0.954903, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/VankovkaSpodem"]
 shape = SubResource("CircleShape2D_6bp64")
@@ -766,6 +803,8 @@ position = Vector2(745, 0)
 
 [node name="NaDraze" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(51, 629)
+weight = 6
+visitor_color = Color(1, 0.141176, 0.337255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/NaDraze"]
 shape = SubResource("CircleShape2D_jkdf5")
@@ -774,6 +813,7 @@ shape = SubResource("CircleShape2D_jkdf5")
 
 [node name="Lazne" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(-60, 392)
+visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Lazne"]
 shape = SubResource("CircleShape2D_jkdf5")
@@ -782,6 +822,7 @@ shape = SubResource("CircleShape2D_jkdf5")
 
 [node name="Anapurna" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1451, 132)
+visitor_color = Color(1, 0.141176, 0.337255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Anapurna"]
 position = Vector2(0, 1)
@@ -793,6 +834,7 @@ position = Vector2(4, 2)
 [node name="GrandHotel" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1711, 125)
 release_period = 5.0
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/GrandHotel"]
 position = Vector2(0, 1)
@@ -803,6 +845,7 @@ position = Vector2(4, 5)
 
 [node name="Letmo" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1425, 281)
+visitor_color = Color(0.47975, 0.619264, 0.954903, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Letmo"]
 shape = SubResource("CircleShape2D_ynf5e")
@@ -818,6 +861,7 @@ position = Vector2(-29, -38)
 
 [node name="Zelnak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(773, -58)
+visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Zelnak"]
 shape = SubResource("CircleShape2D_hptm8")
@@ -833,6 +877,7 @@ position = Vector2(-421, 47)
 
 [node name="Svobodak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1031, -46)
+visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Svobodak"]
 shape = SubResource("CircleShape2D_d1ilt")
@@ -845,6 +890,7 @@ position = Vector2(11, 8)
 
 [node name="Malinak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1528, -24)
+visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Malinak"]
 shape = SubResource("CircleShape2D_6iyac")
@@ -857,6 +903,7 @@ position = Vector2(159, 13)
 
 [node name="Katedrala" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(205, -12)
+visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Katedrala"]
 shape = SubResource("CircleShape2D_wsu2k")
@@ -868,6 +915,7 @@ position = Vector2(157, -42)
 
 [node name="Hlavas_Salina1" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1152, 400)
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina1"]
 position = Vector2(95, 0)
@@ -903,6 +951,7 @@ position = Vector2(41, -9)
 [node name="Hlavas_Salina2" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1155, 447)
 capacity = 60
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina2"]
 position = Vector2(95, 0)
@@ -961,6 +1010,7 @@ position = Vector2(41, -6)
 
 [node name="Hlavas_Salina3" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1155, 489)
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina3"]
 position = Vector2(95, 0)
@@ -995,6 +1045,7 @@ position = Vector2(2, 8)
 
 [node name="Hlavas_Bokem" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1779, 312)
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Bokem"]
 position = Vector2(19, 7)
@@ -1025,6 +1076,7 @@ position = Vector2(18, 17)
 
 [node name="Hlavas_Lobby" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1406, 594)
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Lobby"]
 shape = SubResource("RectangleShape2D_kry3j")
@@ -1032,6 +1084,7 @@ shape = SubResource("RectangleShape2D_kry3j")
 [node name="Peron_1" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1043, 663)
 capacity = 80
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_1"]
 rotation = 0.0501757
@@ -1041,6 +1094,7 @@ shape = SubResource("RectangleShape2D_21xkr")
 position = Vector2(1018, 720)
 release_time = 20.0
 capacity = 100
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_2"]
 rotation = 0.0501757
@@ -1050,6 +1104,7 @@ shape = SubResource("RectangleShape2D_21xkr")
 position = Vector2(1017, 778)
 release_time = 20.0
 capacity = 50
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_3"]
 rotation = 0.0501757
@@ -1060,6 +1115,7 @@ position = Vector2(452, 665)
 weight = 5
 release_time = 10.0
 capacity = 10
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_5"]
 position = Vector2(2, 2)
@@ -1071,6 +1127,7 @@ position = Vector2(490, 698)
 weight = 5
 release_time = 10.0
 capacity = 10
+visitor_color = Color(0.00442755, 0.567351, 0.232745, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_6"]
 rotation = -0.706387
@@ -1089,6 +1146,7 @@ shape = SubResource("RectangleShape2D_6bp64")
 position = Vector2(361, 402)
 release_time = 20.0
 capacity = 15
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoveSady_West"]
 rotation = 0.0305743
@@ -1127,6 +1185,7 @@ position = Vector2(91, -4)
 position = Vector2(445, 435)
 release_time = 20.0
 capacity = 15
+visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoveSady_East"]
 rotation = 0.0305743
@@ -1344,7 +1403,7 @@ curve = SubResource("Curve2D_6iyac")
 position = Vector2(2249, 200)
 rotation = 2.52452
 wait_seconds = 20
-initial_people = 10
+initial_people = 30
 MAX_SPEED = 8
 
 [node name="Wagon" parent="Nadr1" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
@@ -1418,7 +1477,7 @@ curve = SubResource("Curve2D_fdnlq")
 position = Vector2(-94, 1262)
 rotation = -0.659277
 wait_seconds = 25
-initial_people = 10
+initial_people = 30
 MAX_SPEED = 9
 
 [node name="Wagon" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
@@ -1498,7 +1557,7 @@ curve = SubResource("Curve2D_jkdf5")
 position = Vector2(2357, 178)
 rotation = 2.7625
 wait_seconds = 15
-initial_people = 5
+initial_people = 10
 MAX_SPEED = 11
 
 [node name="Wagon" parent="Nadr3" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]

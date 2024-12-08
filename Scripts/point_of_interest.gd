@@ -5,6 +5,8 @@ class_name PointOfInterest extends Area2D
 @export var release_period: float = 3
 @export var capacity: int = 20
 
+@export var visitor_color: Color = Color.WHITE
+
 @onready var release_timer: Timer = $ReleaseTimer
 
 var exits: Array[ExitDoor] = []

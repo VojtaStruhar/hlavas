@@ -2,7 +2,10 @@
 class_name Brnak extends Node2D
 
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
-var goal: Node2D
+var goal: Node2D:
+	set(v):
+		goal = v
+		modulate = goal.visitor_color
 
 var SPEED = 20
 

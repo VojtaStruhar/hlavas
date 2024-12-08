@@ -5,6 +5,8 @@ class_name WaitingArea extends Area2D
 @export var release_time: float = 15
 @export var capacity: int = 30
 
+@export var visitor_color: Color = Color.WHITE
+
 @onready var release_timer: Timer = $ReleaseTimer
 @onready var label: Label = $Label
 

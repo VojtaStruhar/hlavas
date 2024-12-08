@@ -54,4 +54,3 @@ func on_train_entered(area: Area2D) -> void:
 		
 		await get_tree().create_timer(1).timeout
 		train.current_speed = arrive_speed
-		print(name, ": took away ", arrive_people_waiting - waiting_area.waiting_people.size(), " people")
