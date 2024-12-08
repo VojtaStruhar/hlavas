@@ -1,10 +1,12 @@
-[gd_scene load_steps=41 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=48 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/tram.gd" id="2_wopkb"]
 [ext_resource type="Texture2D" uid="uid://v5ao2pigmcb1" path="res://Assets/wagon.png" id="3_55qam"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/ExitDoor.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/exit_door.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://c1dldr3cw2kje" path="res://Scenes/waiting_area.tscn" id="6_6bp64"]
+[ext_resource type="Script" uid="uid://cif27233raih3" path="res://Scripts/station.gd" id="8_344ge"]
 
 [sub_resource type="GDScript" id="GDScript_kry3j"]
 resource_name = "debug_ui"
@@ -19,8 +21,10 @@ var people_count = 0:
 
 func _on_spawn_person_pressed() -> void:
 	var place = PlacesManager.get_random() as PointOfInterest
-	place.people_inside += 1
-	people_count += 1
+	
+	if place is PointOfInterest:
+		place.people_inside += 1
+		people_count += 1
 
 
 func _on_spawn_10_people_pressed() -> void:
@@ -197,6 +201,27 @@ radius = 18.0278
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsu2k"]
 radius = 15.2971
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynf5e"]
+size = Vector2(210, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_344ge"]
+size = Vector2(210, 26)
+
+[sub_resource type="Curve2D" id="Curve2D_d1ilt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1105, 377, 38.4971, 15.2126, -38.4971, -15.2126, 831, 309, 22.0427, 24.5264, -22.0427, -24.5264, 717, 228, 0, 0, 0, 0, 599, 82, 25.7682, 10.2452, -25.7682, -10.2452, 547, 44, 0, 0, 0, 0, 385, 30, 34.4611, 2.17322, -34.4611, -2.17322, 320, 26, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12, 30.7895, -0.466507, -30.7895, 0.466507, -56, 13, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
+}
+point_count = 16
+
+[sub_resource type="Curve2D" id="Curve2D_344ge"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 858, -454, 21.3682, -16.1548, -21.3682, 16.1548, 682, -311, 0, 0, 0, 0, 619, -253, 36.6343, -21.4218, -36.6343, 21.4218, 303, -2, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12)
+}
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
+size = Vector2(20, 14)
+
 [node name="Main" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -229,17 +254,21 @@ texture = ExtResource("1_42f77")
 anchor_mode = 0
 
 [node name="T1_Hybesova-NoveSady" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_ri0xk")
 
 [node name="T1_NoveSady-Nadrazi" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_ma3t8")
 
 [node name="T1_Nadrazi-Malinak" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_dccwy")
 
 [node name="Tram" type="PathFollow2D" parent="." node_paths=PackedStringArray("tracks")]
 position = Vector2(-87, 542)
 rotation = -0.20964
+scale = Vector2(1, 1)
 script = ExtResource("2_wopkb")
 tracks = [NodePath("../T1_Hybesova-NoveSady"), NodePath("../T1_NoveSady-Nadrazi"), NodePath("../T1_Nadrazi-Malinak")]
 
@@ -596,137 +625,192 @@ use_edge_connections = false
 navigation_polygon = SubResource("NavigationPolygon_344ge")
 use_edge_connections = false
 
-[node name="KFC" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Shops" type="Node2D" parent="."]
+
+[node name="KFC" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1061, 327)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KFC"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/KFC"]
 shape = SubResource("CircleShape2D_21xkr")
 
-[node name="ExitDoor" parent="KFC" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/KFC" instance=ExtResource("5_kry3j")]
 position = Vector2(-4, 4)
 
-[node name="McDonalds" parent="." instance=ExtResource("4_jjvhh")]
+[node name="McDonalds" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(955, 130)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="McDonalds"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/McDonalds"]
 shape = SubResource("CircleShape2D_fdnlq")
 
-[node name="ExitDoor" parent="McDonalds" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/McDonalds" instance=ExtResource("5_kry3j")]
 position = Vector2(1, -2)
 
-[node name="Dornych" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Dornych" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1256, 971)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dornych"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Dornych"]
 shape = SubResource("CircleShape2D_kry3j")
 
-[node name="ExitDoor" parent="Dornych" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Dornych" instance=ExtResource("5_kry3j")]
 position = Vector2(64, 61)
 
-[node name="ExitDoor2" parent="Dornych" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Dornych" instance=ExtResource("5_kry3j")]
 position = Vector2(-37, -5)
 
-[node name="ExitDoor3" parent="Dornych" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor3" parent="Shops/Dornych" instance=ExtResource("5_kry3j")]
 position = Vector2(18, 1)
 
-[node name="Vankovka" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Vankovka" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1332, 1127)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vankovka"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Vankovka"]
 shape = SubResource("CircleShape2D_6bp64")
 
-[node name="ExitDoor" parent="Vankovka" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Vankovka" instance=ExtResource("5_kry3j")]
 
-[node name="NaDraze" parent="." instance=ExtResource("4_jjvhh")]
+[node name="NaDraze" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(51, 629)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NaDraze"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/NaDraze"]
 shape = SubResource("CircleShape2D_jkdf5")
 
-[node name="ExitDoor" parent="NaDraze" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/NaDraze" instance=ExtResource("5_kry3j")]
 
-[node name="Lazne" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Lazne" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(-60, 392)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lazne"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Lazne"]
 shape = SubResource("CircleShape2D_jkdf5")
 
-[node name="ExitDoor" parent="Lazne" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Lazne" instance=ExtResource("5_kry3j")]
 
-[node name="Anapurna" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Anapurna" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1451, 132)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anapurna"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Anapurna"]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_344ge")
 
-[node name="ExitDoor" parent="Anapurna" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Anapurna" instance=ExtResource("5_kry3j")]
 position = Vector2(4, 2)
 
-[node name="Letmo" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Letmo" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1425, 281)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Letmo"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Letmo"]
 shape = SubResource("CircleShape2D_ynf5e")
 
-[node name="ExitDoor" parent="Letmo" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Letmo" instance=ExtResource("5_kry3j")]
 position = Vector2(32, 59)
 
-[node name="ExitDoor2" parent="Letmo" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Letmo" instance=ExtResource("5_kry3j")]
 position = Vector2(-21, 43)
 
-[node name="ExitDoor3" parent="Letmo" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor3" parent="Shops/Letmo" instance=ExtResource("5_kry3j")]
 position = Vector2(-29, -38)
 
-[node name="Zelnak" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Zelnak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(773, -58)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zelnak"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Zelnak"]
 shape = SubResource("CircleShape2D_hptm8")
 
-[node name="ExitDoor" parent="Zelnak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Zelnak" instance=ExtResource("5_kry3j")]
 position = Vector2(19, 11)
 
-[node name="ExitDoor2" parent="Zelnak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Zelnak" instance=ExtResource("5_kry3j")]
 position = Vector2(-20, 29)
 
-[node name="ExitDoor3" parent="Zelnak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor3" parent="Shops/Zelnak" instance=ExtResource("5_kry3j")]
 position = Vector2(-421, 47)
 
-[node name="Svobodak" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Svobodak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1031, -46)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Svobodak"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Svobodak"]
 shape = SubResource("CircleShape2D_d1ilt")
 
-[node name="ExitDoor" parent="Svobodak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Svobodak" instance=ExtResource("5_kry3j")]
 position = Vector2(-14, 3)
 
-[node name="ExitDoor2" parent="Svobodak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Svobodak" instance=ExtResource("5_kry3j")]
 position = Vector2(11, 8)
 
-[node name="Malinak" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Malinak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1528, -24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Malinak"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Malinak"]
 shape = SubResource("CircleShape2D_6iyac")
 
-[node name="ExitDoor" parent="Malinak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Malinak" instance=ExtResource("5_kry3j")]
 position = Vector2(-1, 8)
 
-[node name="ExitDoor2" parent="Malinak" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Malinak" instance=ExtResource("5_kry3j")]
 position = Vector2(159, 13)
 
-[node name="Katedrala" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Katedrala" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(205, -12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Katedrala"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Katedrala"]
 shape = SubResource("CircleShape2D_wsu2k")
 
-[node name="ExitDoor" parent="Katedrala" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor" parent="Shops/Katedrala" instance=ExtResource("5_kry3j")]
 
-[node name="ExitDoor2" parent="Katedrala" instance=ExtResource("5_kry3j")]
+[node name="ExitDoor2" parent="Shops/Katedrala" instance=ExtResource("5_kry3j")]
 position = Vector2(157, -42)
+
+[node name="Hlavas_Salina1" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(1152, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina1"]
+position = Vector2(95, 0)
+shape = SubResource("RectangleShape2D_ynf5e")
+
+[node name="Hlavas_Salina2" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(1155, 447)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina2"]
+position = Vector2(95, 0)
+shape = SubResource("RectangleShape2D_344ge")
+
+[node name="Hlavas_Salina3" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(1155, 489)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina3"]
+position = Vector2(95, 0)
+shape = SubResource("RectangleShape2D_ynf5e")
+
+[node name="T12_Vlhka-Silingrak" type="Path2D" parent="."]
+position = Vector2(1152, 400)
+curve = SubResource("Curve2D_d1ilt")
+
+[node name="Malinak-Hlavas" type="Path2D" parent="."]
+position = Vector2(1152, 400)
+curve = SubResource("Curve2D_344ge")
+
+[node name="Station_Top_West" type="Node2D" parent="."]
+position = Vector2(1152, 400)
+script = ExtResource("8_344ge")
+
+[node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
+position = Vector2(0, 11)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="Station_Top_East" type="Node2D" parent="."]
+position = Vector2(1346, 439)
+script = ExtResource("8_344ge")
+
+[node name="TrainChecker" type="Area2D" parent="Station_Top_East"]
+position = Vector2(0, -12)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_East/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]

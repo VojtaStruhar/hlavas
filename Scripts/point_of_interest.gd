@@ -41,7 +41,7 @@ func release_person() -> void:
 	people_inside -= 1
 	var b = BRNAK_TEMPLATE.instantiate()
 	var exit = exits.pick_random()
-	print(self.name, " released a person, ", people_inside, " left")
+	
 	get_tree().current_scene.add_child(b)
 	b.global_position = exit.global_position
 	

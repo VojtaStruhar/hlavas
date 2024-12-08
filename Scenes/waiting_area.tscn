@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1dldr3cw2kje"]
+
+[ext_resource type="Script" uid="uid://xvaba3ew0wm3" path="res://Scripts/waiting_area.gd" id="1_au1ep"]
+
+[node name="WaitingArea" type="Area2D"]
+script = ExtResource("1_au1ep")

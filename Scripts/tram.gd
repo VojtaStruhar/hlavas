@@ -1,5 +1,5 @@
 @icon("res://Assets/tram_icon.png")
-extends PathFollow2D
+class_name Train extends PathFollow2D
 
 
 @export var tracks: Array[Path2D]
