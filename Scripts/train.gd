@@ -39,4 +39,4 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area is SlowDownArea:
 		var t = create_tween()
-		t.tween_property(self, "current_speed", MAX_SPEED, 1.0)
+		t.tween_property(self, "current_speed", MAX_SPEED, 2.0)

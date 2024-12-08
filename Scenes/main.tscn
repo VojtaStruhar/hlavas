@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=58 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
@@ -214,6 +214,9 @@ size = Vector2(20, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_344ge"]
 size = Vector2(210, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkdf5"]
+size = Vector2(12, 94)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
 size = Vector2(56, 92)
 
@@ -229,24 +232,41 @@ size = Vector2(140, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1ilt"]
 size = Vector2(462, 116)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsu2k"]
+size = Vector2(48, 229)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(318, 116)
 
 [sub_resource type="Curve2D" id="Curve2D_d1ilt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 368, 709, -54.0074, 43.8291, 54.0074, -43.8291, 511, 417, -22.5394, 16.9046, 22.5394, -16.9046, 624, 336, -7.2393, 58.4669, 7.2393, -58.4669, 698, 243, 0, 0, 0, 0, 628, 113, 28.3083, 12.7853, -28.3083, -12.7853, 547, 44, 0, 0, 0, 0, 385, 30, 35.8271, -13.8776, -35.8271, 13.8776, 320, 47, 23.595, -1.24184, -23.595, 1.24184, 241, 64, 0, 0, 0, 0, -1, 65, 30.7895, -0.466507, -30.7895, 0.466507, -50, 66, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
+"points": PackedVector2Array(0, 0, 0, 0, 368, 709, -54.0074, 43.8291, 54.0074, -43.8291, 511, 417, -22.5394, 16.9046, 22.5394, -16.9046, 624, 336, -7.2393, 58.4669, 7.2393, -58.4669, 718, 229, 30.4282, 27.0473, -30.4282, -27.0473, 636, 74, 37.3241, 8.27744, -37.3241, -8.27744, 536, 29, 26.296, -3.00526, -26.296, 3.00526, 385, 30, 35.8271, -13.8776, -35.8271, 13.8776, 320, 47, 23.595, -1.24184, -23.595, 1.24184, 241, 64, 0, 0, 0, 0, -1, 65, 30.7895, -0.466507, -30.7895, 0.466507, -50, 66, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
 }
 point_count = 17
 
 [sub_resource type="Curve2D" id="Curve2D_6bp64"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -89, 543, 0, 0, 0, 0, 182, 445, -19.4365, 3.66425, 19.4365, -3.66425, 246, 423, -18.3213, -0.318631, 18.3213, 0.318631, 300, 422, 0, 0, 0, 0, 508, 427, -28.3581, -0.637262, 28.3581, 0.637262, 1014, 441, -19.7551, 4.1422, 19.7551, -4.1422, 1050, 438, -18.0026, 0, 18.0026, 0, 1092, 427, 0, 0, 0, 0, 1352, 427, -18.0026, 0.796577, 18.0026, -0.796577, 1401, 426, -16.3856, 10.4097, 16.3856, -10.4097, 1452, 412, 0, 0, 0, 0, 1511, 370, -39.444, 32.3065, 39.444, -32.3065, 1743, 187, -33.0578, 28.1743, 33.0578, -28.1743, 1826, 101, 0, 0, 0, 0, 2012, -44)
+"points": PackedVector2Array(0, 0, 0, 0, -89, 543, 0, 0, 0, 0, 182, 445, -19.4365, 3.66425, 19.4365, -3.66425, 246, 423, -18.3213, -0.318631, 18.3213, 0.318631, 300, 422, 0, 0, 0, 0, 508, 427, -28.3581, -0.637262, 28.3581, 0.637262, 1014, 441, -19.7551, 4.1422, 19.7551, -4.1422, 1050, 438, -18.0026, 0, 18.0026, 0, 1092, 427, 0, 0, 0, 0, 1352, 427, -18.0026, 0.796577, 18.0026, -0.796577, 1401, 426, -16.3856, 10.4097, 16.3856, -10.4097, 1452, 412, 0, 0, 0, 0, 1511, 370, -39.444, 32.3065, 39.444, -32.3065, 1743, 187, -33.0578, 28.1743, 33.0578, -28.1743, 1826, 101, 0, 0, 0, 0, 2010, -51)
 }
 point_count = 15
 
 [sub_resource type="Curve2D" id="Curve2D_344ge"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -89, 570, -26.6717, 11.2697, 26.6717, -11.2697, 194, 467, -15.0263, 5.2592, 15.0263, -5.2592, 237, 450, -27.7986, -0.751315, 27.7986, 0.751315, 296, 444, 0, 0, 0, 0, 514, 448, -21.0368, -0.751315, 21.0368, 0.751315, 1029, 462, -25.9204, -2.25394, 25.9204, 2.25394, 1082, 478, -17.6559, 0.375657, 17.6559, -0.375657, 1114, 480, 0, 0, 0, 0, 1354, 478, -23.6664, 1.12697, 23.6664, -1.12697, 1399, 477, -19.5342, 7.8888, 19.5342, -7.8888, 1460, 463, -30.8039, 6.01052, 30.8039, -6.01052, 1513, 445, -37.1901, -1.50263, 37.1901, 1.50263, 1629, 444, -25.5447, -9.01578, 25.5447, 9.01578, 1696, 454, -26.296, -28.1743, 26.296, 28.1743, 1767, 501, -18.4072, -23.6664, 18.4072, 23.6664, 1881, 647, -49.2111, -23.2908, 49.2111, 23.2908, 1991, 729, 0, 0, 0, 0, 2253, 794)
+}
+point_count = 18
 
 [sub_resource type="Curve2D" id="Curve2D_ynf5e"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1990, -54, 16.1949, -15.6682, -16.1949, 15.6682, 1803, 102, 18.5648, -15.5365, -18.5648, 15.5365, 1732, 180, 5.54954, -4.24377, -5.54954, 4.24377, 1453, 399, 11.0991, -2.17629, -11.0991, 2.17629, 1428, 411, 0, 0, 0, 0, 1382, 414, 0, 0, 0, 0, 1149, 413, 16.0875, 0.846711, -16.0875, -0.846711, 1125, 413, 12.4184, 15.2408, -12.4184, -15.2408, 1069, 391, 4.79803, 16.3697, -4.79803, -16.3697, 1041, 330, 2.54013, 12.9829, -2.54013, -12.9829, 987, 115, -8.18487, 19.7566, 8.18487, -19.7566, 996, 62, 0, 0, 0, 0, 1037, -49)
+}
+point_count = 13
+
+[sub_resource type="Curve2D" id="Curve2D_hptm8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2253, 776, 67.65, 30.25, -67.65, -30.25, 2034, 721, 26.95, 31.9, -26.95, -31.9, 1920, 625, 22.55, 38.5, -22.55, -38.5, 1809, 464, -0.282237, 34.4329, 0.282237, -34.4329, 1776, 295, -5.01112, 31.1776, 5.01112, -31.1776, 1781, 203, -33.0578, 28.1743, 33.0578, -28.1743, 1826, 101, 0, 0, 0, 0, 2010, -51)
+}
+point_count = 8
 
 [node name="Main" type="Node2D"]
 
@@ -937,6 +957,36 @@ position = Vector2(-70, 7)
 [node name="ExitDoor5" parent="Station_Bottom_East" instance=ExtResource("5_kry3j")]
 position = Vector2(2, 8)
 
+[node name="Hlavas_Bokem" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(1779, 312)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Bokem"]
+position = Vector2(19, 7)
+rotation = -0.0817276
+shape = SubResource("RectangleShape2D_jkdf5")
+
+[node name="Station_Bokem" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(1779, 312)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Hlavas_Bokem")
+get_in_ratio = 0.9
+
+[node name="TrainChecker" type="Area2D" parent="Station_Bokem"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Bokem/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Bokem" instance=ExtResource("5_kry3j")]
+position = Vector2(17, 1)
+
+[node name="ExitDoor2" parent="Station_Bokem" instance=ExtResource("5_kry3j")]
+position = Vector2(18, 9)
+
+[node name="ExitDoor3" parent="Station_Bokem" instance=ExtResource("5_kry3j")]
+position = Vector2(18, 17)
+
 [node name="Hlavas_Lobby" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1406, 594)
 
@@ -1068,13 +1118,46 @@ position = Vector2(-56, 4)
 [node name="ExitDoor5" parent="Station_NoveSady_East" instance=ExtResource("5_kry3j")]
 position = Vector2(-21, 7)
 
+[node name="Station_NoveSady_East2" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(497, 443)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../NoveSady_East")
+get_in_ratio = 0.3
+get_out_ratio = 0.3
+
+[node name="TrainChecker" type="Area2D" parent="Station_NoveSady_East2"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_NoveSady_East2/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_NoveSady_East2" instance=ExtResource("5_kry3j")]
+position = Vector2(13, -5)
+
+[node name="ExitDoor2" parent="Station_NoveSady_East2" instance=ExtResource("5_kry3j")]
+position = Vector2(-81, -9)
+
+[node name="ExitDoor3" parent="Station_NoveSady_East2" instance=ExtResource("5_kry3j")]
+position = Vector2(-61, -8)
+
+[node name="ExitDoor4" parent="Station_NoveSady_East2" instance=ExtResource("5_kry3j")]
+position = Vector2(-40, -9)
+
+[node name="ExitDoor5" parent="Station_NoveSady_East2" instance=ExtResource("5_kry3j")]
+position = Vector2(-5, -6)
+
 [node name="SlowDown" parent="." instance=ExtResource("7_6bp64")]
-visible = false
 position = Vector2(1267, 445)
+slow_speed = 4.0
 
 [node name="Hlavas" type="CollisionShape2D" parent="SlowDown"]
 position = Vector2(-29, 0)
 shape = SubResource("RectangleShape2D_d1ilt")
+
+[node name="HlavasBokem" type="CollisionShape2D" parent="SlowDown"]
+position = Vector2(519, -128.5)
+shape = SubResource("RectangleShape2D_wsu2k")
 
 [node name="NoveSady" type="CollisionShape2D" parent="SlowDown"]
 position = Vector2(-856, -19)
@@ -1100,8 +1183,31 @@ wait_seconds = 7
 [node name="T7_Soukenicka-Vlhka" type="Path2D" parent="."]
 curve = SubResource("Curve2D_344ge")
 
+[node name="T7" parent="T7_Soukenicka-Vlhka" instance=ExtResource("7_344ge")]
+position = Vector2(-89, 570)
+rotation = -0.349055
+wait_seconds = 8
+initial_people = 10
+MAX_SPEED = 12
+
 [node name="T9_Malinak-Zelnak" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ynf5e")
+
+[node name="T9" parent="T9_Malinak-Zelnak" instance=ExtResource("7_344ge")]
+position = Vector2(1990, -54)
+rotation = 2.44633
+wait_seconds = 4
+initial_people = 10
+MAX_SPEED = 9
+
+[node name="T10_Vlhka-Malinak" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hptm8")
+
+[node name="T10" parent="T10_Vlhka-Malinak" instance=ExtResource("7_344ge")]
+position = Vector2(2253, 776)
+rotation = -2.89554
+wait_seconds = 15
+initial_people = 10
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]

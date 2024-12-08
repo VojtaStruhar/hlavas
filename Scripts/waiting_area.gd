@@ -66,11 +66,12 @@ func release_person() -> void:
 	person.modulate = Color.WHITE
 
 func on_release_timeouot() -> void:
-	if waiting_people.size() > 0:
-		release_person()
-	
 	var ppl_before = waiting_people.size()
-	waiting_people.filter(is_instance_valid)
+	waiting_people = waiting_people.filter(is_instance_valid)
 	var ppl_after = waiting_people.size()
 	if ppl_after < ppl_before:
 		print("[Cleanup] ", name, " ", ppl_before - ppl_after, " invalid instances")
+
+	if waiting_people.size() > 0:
+		release_person()
+	
