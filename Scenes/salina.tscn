@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckvg3qcsrljon"]
+
+[ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/train.gd" id="1_hxn8i"]
+[ext_resource type="Texture2D" uid="uid://v5ao2pigmcb1" path="res://Assets/wagon.png" id="2_eax12"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eax12"]
+
+[node name="Salina" type="PathFollow2D"]
+script = ExtResource("1_hxn8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, 20)
+texture = ExtResource("2_eax12")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_eax12")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

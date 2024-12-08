@@ -1,9 +1,11 @@
-[gd_scene load_steps=48 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=49 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
+[ext_resource type="Script" uid="uid://b1gnnulmc0jev" path="res://Scripts/railway.gd" id="4_21xkr"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/exit_door.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://c1dldr3cw2kje" path="res://Scenes/waiting_area.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bj6l5nb2bqucp" path="res://Scenes/slow_down.tscn" id="7_6bp64"]
 [ext_resource type="Script" uid="uid://cif27233raih3" path="res://Scripts/station.gd" id="8_344ge"]
 
 [sub_resource type="GDScript" id="GDScript_kry3j"]
@@ -36,31 +38,11 @@ func _on_spawn_person_pressed() -> void:
 func _on_spawn_10_people_pressed() -> void:
 	for i in range(10):
 		_on_spawn_person_pressed()
+
+
+func _on_spawn_train_pressed() -> void:
+	TrainManager.deploy_random()
 "
-
-[sub_resource type="Curve2D" id="Curve2D_ri0xk"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -87, 542, 0, 0, 0, 0, -40, 532, 0, 0, 0, 0, 212, 439, 0, 0, 0, 0, 292, 421, 0, 0, 0, 0, 499, 427)
-}
-point_count = 5
-
-[sub_resource type="Curve2D" id="Curve2D_ma3t8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 499, 427, -27.0138, 0.105112, 27.0138, -0.105112, 1031, 440, -30.7978, -0.105112, 30.7978, 0.105112, 1102, 425, 0, 0, 0, 0, 1144, 426, 0, 0, 0, 0, 1350, 428)
-}
-point_count = 5
-
-[sub_resource type="Curve2D" id="Curve2D_dccwy"]
-_data = {
-"points": PackedVector2Array(-62.3661, -0.31498, 62.3661, 0.31498, 1350, 428, -19.6863, 8.66196, 19.6863, -8.66196, 1445, 418, -10.3943, 8.34698, 10.3943, -8.34698, 1519, 370, -19.2138, 15.434, 19.2138, -15.434, 1758, 171, -15.1191, 11.8118, 15.1191, -11.8118, 1821, 113, 0, 0, 0, 0, 2023, -48)
-}
-point_count = 6
-
-[sub_resource type="Curve2D" id="Curve2D_344ge"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 858, -454, 21.3682, -16.1548, -21.3682, 16.1548, 682, -311, 0, 0, 0, 0, 619, -253, 36.6343, -21.4218, -36.6343, 21.4218, 303, -2, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12)
-}
-point_count = 6
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
 vertices = PackedVector2Array(1565.93, 371.797, 1746.82, 204.172, 1739.33, 243.828, 1578.39, 376.797, 247.812, 494.141, 247.211, 482.07, 762.883, 490.992, 762.883, 491, 763.781, 515.031, 1077.8, 548.328, 915.172, 533.359, 916.18, 511.18, 1003.32, 497.977, 1043.87, 511.5, 1076.24, 542.867, 818.383, 506.844, 816.367, 527.844, 796.773, 527.023, 1467, 512.859, 1467, 529.219, 1417.64, 532.008, 1434.24, 515.938, 1141.95, 546, 1244.26, 546, 1245.26, 561, 1362.45, 586.93, 1079.77, 583.047, 1101.78, 545, 1573.01, 401.523, 1561.85, 467.57, 1571.02, 477.844, 1566.55, 485.289, 1493.55, 495.156, 1500.36, 474.859, 1289, 523.781, 1356.53, 539.523, 1289, 561)
@@ -213,15 +195,6 @@ radius = 18.0278
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsu2k"]
 radius = 15.2971
 
-[sub_resource type="Curve2D" id="Curve2D_d1ilt"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1105, 377, 38.4971, 15.2126, -38.4971, -15.2126, 831, 309, 22.0427, 24.5264, -22.0427, -24.5264, 717, 228, 0, 0, 0, 0, 599, 82, 25.7682, 10.2452, -25.7682, -10.2452, 547, 44, 0, 0, 0, 0, 385, 30, 34.4611, 2.17322, -34.4611, -2.17322, 320, 26, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12, 30.7895, -0.466507, -30.7895, 0.466507, -56, 13, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
-}
-point_count = 16
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
-size = Vector2(20, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynf5e"]
 size = Vector2(210, 14)
 
@@ -233,6 +206,24 @@ size = Vector2(56, 92)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
 size = Vector2(398, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bp64"]
+size = Vector2(136.014, 73.2761)
+
+[sub_resource type="Curve2D" id="Curve2D_d1ilt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1105, 377, 38.4971, 15.2126, -38.4971, -15.2126, 831, 309, 22.0427, 24.5264, -22.0427, -24.5264, 717, 228, 0, 0, 0, 0, 599, 82, 25.7682, 10.2452, -25.7682, -10.2452, 547, 44, 0, 0, 0, 0, 385, 30, 34.4611, 2.17322, -34.4611, -2.17322, 320, 26, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12, 30.7895, -0.466507, -30.7895, 0.466507, -56, 13, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
+}
+point_count = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
+size = Vector2(20, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1ilt"]
+size = Vector2(404, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
+size = Vector2(318, 116)
 
 [node name="Main" type="Node2D"]
 
@@ -254,6 +245,10 @@ text = "Spawn person"
 layout_mode = 2
 text = "Spawn 10 People"
 
+[node name="SpawnTrain" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Spawn a Train"
+
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 
@@ -264,22 +259,6 @@ texture = ExtResource("1_42f77")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-
-[node name="T1_Hybesova-NoveSady" type="Path2D" parent="."]
-visible = false
-curve = SubResource("Curve2D_ri0xk")
-
-[node name="T1_NoveSady-Nadrazi" type="Path2D" parent="."]
-visible = false
-curve = SubResource("Curve2D_ma3t8")
-
-[node name="T1_Nadrazi-Malinak" type="Path2D" parent="."]
-visible = false
-curve = SubResource("Curve2D_dccwy")
-
-[node name="Malinak-Hlavas" type="Path2D" parent="."]
-position = Vector2(1152, 400)
-curve = SubResource("Curve2D_344ge")
 
 [node name="Links" type="Node2D" parent="."]
 
@@ -763,34 +742,6 @@ shape = SubResource("CircleShape2D_wsu2k")
 [node name="ExitDoor2" parent="Shops/Katedrala" instance=ExtResource("5_kry3j")]
 position = Vector2(157, -42)
 
-[node name="T12_Vlhka-Silingrak" type="Path2D" parent="."]
-position = Vector2(1152, 400)
-curve = SubResource("Curve2D_d1ilt")
-
-[node name="Station_Top_West" type="Node2D" parent="."]
-position = Vector2(1152, 400)
-script = ExtResource("8_344ge")
-
-[node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
-position = Vector2(0, 11)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
-shape = SubResource("RectangleShape2D_hptm8")
-
-[node name="Station_Top_East" type="Node2D" parent="."]
-position = Vector2(1346, 439)
-script = ExtResource("8_344ge")
-
-[node name="TrainChecker" type="Area2D" parent="Station_Top_East"]
-position = Vector2(0, -12)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_East/TrainChecker"]
-shape = SubResource("RectangleShape2D_hptm8")
-
 [node name="Hlavas_Salina1" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1152, 400)
 
@@ -800,6 +751,7 @@ shape = SubResource("RectangleShape2D_ynf5e")
 
 [node name="Hlavas_Salina2" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1155, 447)
+capacity = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hlavas_Salina2"]
 position = Vector2(95, 0)
@@ -859,5 +811,41 @@ release_time = 30.0
 rotation = -0.706387
 shape = SubResource("RectangleShape2D_21xkr")
 
+[node name="Park" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(363, 92)
+capacity = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Park"]
+rotation = -1.27591
+shape = SubResource("RectangleShape2D_6bp64")
+
+[node name="T12_Vlhka-Silingrak" type="Path2D" parent="."]
+position = Vector2(1152, 400)
+curve = SubResource("Curve2D_d1ilt")
+script = ExtResource("4_21xkr")
+
+[node name="Station_Top_West" type="Node2D" parent="."]
+position = Vector2(1152, 411)
+script = ExtResource("8_344ge")
+
+[node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="SlowDown" parent="." instance=ExtResource("7_6bp64")]
+visible = false
+position = Vector2(1267, 445)
+
+[node name="Hlavas" type="CollisionShape2D" parent="SlowDown"]
+shape = SubResource("RectangleShape2D_d1ilt")
+
+[node name="NoveSady" type="CollisionShape2D" parent="SlowDown"]
+position = Vector2(-856, -19)
+shape = SubResource("RectangleShape2D_6iyac")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnTrain" to="CanvasLayer" method="_on_spawn_train_pressed"]

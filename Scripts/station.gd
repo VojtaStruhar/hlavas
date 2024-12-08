@@ -2,6 +2,8 @@
 class_name Station extends Node2D
 
 @export var waiting_area: WaitingArea
+@export_range(0, 1, 0.01) var get_in_ratio: float = 0.5
+@export_range(0, 1, 0.01) var get_out_ratio: float = 0.5
 
 @onready var train_checker: Area2D = $TrainChecker
 

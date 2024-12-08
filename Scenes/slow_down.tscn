@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj6l5nb2bqucp"]
+
+[ext_resource type="Script" uid="uid://b35uk0psokflm" path="res://Scripts/slow_down.gd" id="1_dg2sd"]
+
+[node name="SlowDown" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_dg2sd")
+slow_speed = 5.0

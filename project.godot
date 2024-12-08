@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlacesManager="*res://Scripts/PlacesManager.gd"
+TrainManager="*res://Scripts/TrainManager.gd"
 
 [display]
 

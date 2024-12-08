@@ -2,47 +2,37 @@
 class_name Train extends PathFollow2D
 
 
-@export var tracks: Array[Path2D]
+const MAX_SPEED = 15
 
-const MAX_SPEED = 2
-
-var current_track_index = 0
-var current_track: Path2D = null
-
+var current_speed = 0
+var people_inside = 0
 
 func _ready() -> void:
 	loop = false
-	start.call_deferred()
-
-func start() -> void:
-	current_track_index = 0
-	current_track = tracks[current_track_index]
-	reparent(current_track, false)
 	progress_ratio = 0
-	
-	print(current_track.curve.sample_baked(-0.1))
-	print(current_track.curve.sample_baked(0))
-	print(current_track.curve.sample_baked(0.1))
+	current_speed = MAX_SPEED
+
 
 func _process(delta: float) -> void:
-	progress_ratio += get_speed() * delta
-	
-	if progress_ratio >= 1:
-		next_track()
+	progress += get_speed() * delta
 
-func next_track() -> void:
-	current_track_index += 1
-	
-	if current_track_index >= tracks.size():
-		print("Tram finished!")
+	if progress_ratio >= 1:
+		print("Freeing a train with ", people_inside, " people inside!")
 		queue_free()
-		return
-	
-	current_track = tracks[current_track_index]
-	print("Next track!", current_track.name)
-	reparent(current_track, false)
-	progress_ratio = 0
 
 
 func get_speed() -> float:
-	return max(sin(progress_ratio * PI), 0.01)
+	const KMH = 3.6 * 3  # 1m is about 3px here
+	return current_speed * KMH
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area is SlowDownArea:
+		var t = create_tween()
+		t.tween_property(self, "current_speed", area.slow_speed, 1.0)
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area is SlowDownArea:
+		var t = create_tween()
+		t.tween_property(self, "current_speed", MAX_SPEED, 1.0)
