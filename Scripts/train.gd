@@ -3,10 +3,12 @@ class_name Train extends PathFollow2D
 
 @export var wait_seconds = 10
 @export var initial_people = 20
-@export var MAX_SPEED = 15
+@export var MAX_SPEED = 12
+
 
 var people_inside = 0
 var current_speed = 0
+var number_of_wagons = 0
 
 func _ready() -> void:
 	setup()

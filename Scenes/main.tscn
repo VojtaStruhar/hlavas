@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=59 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj6l5nb2bqucp" path="res://Scenes/slow_down.tscn" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://ckvg3qcsrljon" path="res://Scenes/salina.tscn" id="7_344ge"]
 [ext_resource type="Script" uid="uid://cif27233raih3" path="res://Scripts/station.gd" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://dtkob2dormtjh" path="res://Scenes/wagon.tscn" id="8_ynf5e"]
 
 [sub_resource type="GDScript" id="GDScript_kry3j"]
 resource_name = "debug_ui"
@@ -238,17 +239,17 @@ size = Vector2(48, 229)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(318, 116)
 
-[sub_resource type="Curve2D" id="Curve2D_d1ilt"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 368, 709, -54.0074, 43.8291, 54.0074, -43.8291, 511, 417, -22.5394, 16.9046, 22.5394, -16.9046, 624, 336, -7.2393, 58.4669, 7.2393, -58.4669, 718, 229, 30.4282, 27.0473, -30.4282, -27.0473, 636, 74, 37.3241, 8.27744, -37.3241, -8.27744, 536, 29, 26.296, -3.00526, -26.296, 3.00526, 385, 30, 35.8271, -13.8776, -35.8271, 13.8776, 320, 47, 23.595, -1.24184, -23.595, 1.24184, 241, 64, 0, 0, 0, 0, -1, 65, 30.7895, -0.466507, -30.7895, 0.466507, -50, 66, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
-}
-point_count = 17
-
 [sub_resource type="Curve2D" id="Curve2D_6bp64"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -89, 543, 0, 0, 0, 0, 182, 445, -19.4365, 3.66425, 19.4365, -3.66425, 246, 423, -18.3213, -0.318631, 18.3213, 0.318631, 300, 422, 0, 0, 0, 0, 508, 427, -28.3581, -0.637262, 28.3581, 0.637262, 1014, 441, -19.7551, 4.1422, 19.7551, -4.1422, 1050, 438, -18.0026, 0, 18.0026, 0, 1092, 427, 0, 0, 0, 0, 1352, 427, -18.0026, 0.796577, 18.0026, -0.796577, 1401, 426, -16.3856, 10.4097, 16.3856, -10.4097, 1452, 412, 0, 0, 0, 0, 1511, 370, -39.444, 32.3065, 39.444, -32.3065, 1743, 187, -33.0578, 28.1743, 33.0578, -28.1743, 1826, 101, 0, 0, 0, 0, 2010, -51)
 }
 point_count = 15
+
+[sub_resource type="Curve2D" id="Curve2D_d1ilt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 368, 709, -54.0074, 43.8291, 54.0074, -43.8291, 511, 417, -22.5394, 16.9046, 22.5394, -16.9046, 624, 336, -7.2393, 58.4669, 7.2393, -58.4669, 718, 229, 30.4282, 27.0473, -30.4282, -27.0473, 636, 74, 37.3241, 8.27744, -37.3241, -8.27744, 536, 29, 26.296, -3.00526, -26.296, 3.00526, 385, 30, 35.8271, -13.8776, -35.8271, 13.8776, 320, 47, 23.595, -1.24184, -23.595, 1.24184, 241, 64, 0, 0, 0, 0, -1, 65, 30.7895, -0.466507, -30.7895, 0.466507, -50, 66, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
+}
+point_count = 17
 
 [sub_resource type="Curve2D" id="Curve2D_344ge"]
 _data = {
@@ -1163,6 +1164,25 @@ shape = SubResource("RectangleShape2D_wsu2k")
 position = Vector2(-856, -19)
 shape = SubResource("RectangleShape2D_6iyac")
 
+[node name="T1_Hybesova-Malinak" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6bp64")
+
+[node name="T1" parent="T1_Hybesova-Malinak" instance=ExtResource("7_344ge")]
+position = Vector2(-89, 543)
+rotation = -0.346992
+wait_seconds = 7
+MAX_SPEED = 10
+
+[node name="Wagon" parent="T1_Hybesova-Malinak" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-89, 543)
+rotation = -0.346992
+locomotive = NodePath("../T1")
+
+[node name="Wagon2" parent="T1_Hybesova-Malinak" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-89, 543)
+rotation = -0.346992
+locomotive = NodePath("../T1")
+
 [node name="T12_Uzka-Silingrak" type="Path2D" parent="."]
 position = Vector2(1152, 400)
 curve = SubResource("Curve2D_d1ilt")
@@ -1171,14 +1191,12 @@ curve = SubResource("Curve2D_d1ilt")
 position = Vector2(368, 709)
 rotation = -1.1154
 wait_seconds = 12
+MAX_SPEED = 10
 
-[node name="T1_Hybesova-Malinak" type="Path2D" parent="."]
-curve = SubResource("Curve2D_6bp64")
-
-[node name="T1" parent="T1_Hybesova-Malinak" instance=ExtResource("7_344ge")]
-position = Vector2(-89, 543)
-rotation = -0.346992
-wait_seconds = 7
+[node name="Wagon" parent="T12_Uzka-Silingrak" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(368, 709)
+rotation = -1.1154
+locomotive = NodePath("../T12")
 
 [node name="T7_Soukenicka-Vlhka" type="Path2D" parent="."]
 curve = SubResource("Curve2D_344ge")
@@ -1188,7 +1206,11 @@ position = Vector2(-89, 570)
 rotation = -0.349055
 wait_seconds = 8
 initial_people = 10
-MAX_SPEED = 12
+
+[node name="Wagon" parent="T7_Soukenicka-Vlhka" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-89, 570)
+rotation = -0.349055
+locomotive = NodePath("../T7")
 
 [node name="T9_Malinak-Zelnak" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ynf5e")
@@ -1199,6 +1221,11 @@ rotation = 2.44633
 wait_seconds = 4
 initial_people = 10
 MAX_SPEED = 9
+
+[node name="Wagon" parent="T9_Malinak-Zelnak" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(1990, -54)
+rotation = 2.44633
+locomotive = NodePath("../T9")
 
 [node name="T10_Vlhka-Malinak" type="Path2D" parent="."]
 curve = SubResource("Curve2D_hptm8")
