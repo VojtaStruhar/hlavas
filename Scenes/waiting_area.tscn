@@ -4,3 +4,7 @@
 
 [node name="WaitingArea" type="Area2D"]
 script = ExtResource("1_au1ep")
+
+[node name="ReleaseTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true

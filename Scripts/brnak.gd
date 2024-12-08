@@ -9,9 +9,7 @@ var SPEED = 20
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SPEED += randi_range(-3, 3)
-	
 	goal = PlacesManager.get_random()
-	print("Heading to ", goal.name)
 	
 	if goal:
 		start.call_deferred()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=48 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
-[ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/tram.gd" id="2_wopkb"]
+[ext_resource type="Script" uid="uid://d3wi5ks1jrku1" path="res://Scripts/train.gd" id="2_wopkb"]
 [ext_resource type="Texture2D" uid="uid://v5ao2pigmcb1" path="res://Assets/wagon.png" id="3_55qam"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/exit_door.tscn" id="5_kry3j"]
@@ -14,18 +14,26 @@ script/source = "extends CanvasLayer
 
 @onready var people_label: Label = $VBoxContainer/PeopleLabel
 
+const BRNAK = preload(\"res://Scenes/brnak.tscn\")
+
 var people_count = 0:
 	set(v):
 		people_count = v
 		people_label.text = \"People: \" + str(v)
 
 func _on_spawn_person_pressed() -> void:
-	var place = PlacesManager.get_random() as PointOfInterest
-	
+	var place = PlacesManager.get_random()
+	print(\"Spawning at \", place.name)
 	if place is PointOfInterest:
 		place.people_inside += 1
 		people_count += 1
-
+	elif place is WaitingArea:
+		var b = BRNAK.instantiate()
+		get_tree().current_scene.add_child(b)
+		b.global_position = place.global_position
+		people_count += 1
+	else:
+		push_error(\"FAILED TO SPAWN PERSON AT: \" + str(place))
 
 func _on_spawn_10_people_pressed() -> void:
 	for i in range(10):
@@ -205,7 +213,7 @@ radius = 15.2971
 size = Vector2(210, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_344ge"]
-size = Vector2(210, 26)
+size = Vector2(210, 24)
 
 [sub_resource type="Curve2D" id="Curve2D_d1ilt"]
 _data = {
@@ -268,7 +276,6 @@ curve = SubResource("Curve2D_dccwy")
 [node name="Tram" type="PathFollow2D" parent="." node_paths=PackedStringArray("tracks")]
 position = Vector2(-87, 542)
 rotation = -0.20964
-scale = Vector2(1, 1)
 script = ExtResource("2_wopkb")
 tracks = [NodePath("../T1_Hybesova-NoveSady"), NodePath("../T1_NoveSady-Nadrazi"), NodePath("../T1_Nadrazi-Malinak")]
 
