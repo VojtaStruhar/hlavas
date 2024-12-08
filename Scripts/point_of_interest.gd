@@ -3,6 +3,7 @@ class_name PointOfInterest extends Area2D
 
 @export var weight: int = 10
 @export var release_period: float = 3
+@export var capacity: int = 20
 
 @onready var release_timer: Timer = $ReleaseTimer
 
@@ -33,6 +34,9 @@ func on_area_entered(area: Area2D) -> void:
 			brnak.queue_free()
 			people_inside += 1
 			Stats.people_inside += 1
+	
+	if people_inside > capacity:
+		release_person()
 
 func release_person() -> void:
 	if people_inside == 0:

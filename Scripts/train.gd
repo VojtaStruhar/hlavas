@@ -10,8 +10,10 @@ var people_inside = 0
 var current_speed = 0
 var number_of_wagons = 0
 
+
 func _ready() -> void:
-	setup()
+	# Wait for a little bit before starting
+	get_tree().create_timer(wait_seconds/2.0).timeout.connect(setup)
 
 func setup() -> void:
 	progress_ratio = 0
@@ -20,11 +22,10 @@ func setup() -> void:
 
 func _process(delta: float) -> void:
 	progress += get_speed() * delta
-
 	if progress_ratio >= 1:
 		current_speed = 0
 		progress_ratio = 0
-		get_tree().create_timer(wait_seconds).timeout.connect(setup)
+		get_tree().create_timer(wait_seconds + randf()).timeout.connect(setup)
 
 
 func get_speed() -> float:
@@ -41,4 +42,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area is SlowDownArea:
 		var t = create_tween()
-		t.tween_property(self, "current_speed", MAX_SPEED, 2.0)
+		# speed up slower when you have wagons
+		t.tween_property(self, "current_speed", MAX_SPEED, number_of_wagons +  1)

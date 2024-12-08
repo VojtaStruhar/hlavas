@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=64 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
@@ -15,32 +15,35 @@ script/source = "extends CanvasLayer
 
 @onready var people_label: Label = $VBoxContainer/PeopleLabel
 @onready var people_inside_label: Label = $VBoxContainer/PeopleInsideLabel
+@onready var fps_label: Label = $VBoxContainer/FPSLabel
 
 const BRNAK = preload(\"res://Scenes/brnak.tscn\")
-
-var people_count = 0
 
 func _process(delta: float) -> void:
 	people_label.text = \"People: \" + str(Stats.people_outside)
 	people_inside_label.text = \"In shops: \" + str(Stats.people_inside)
+	fps_label.text = \"FPS: \" + str(Engine.get_frames_per_second())
 
 func _on_spawn_person_pressed() -> void:
 	var place = PlacesManager.get_random()
 	
 	if place is PointOfInterest:
 		place.people_inside += 1
-		people_count += 1
+		Stats.people_inside += 1
 	elif place is WaitingArea:
 		var b = BRNAK.instantiate()
 		get_tree().current_scene.add_child(b)
 		b.global_position = place.global_position
-		people_count += 1
 	else:
 		push_error(\"FAILED TO SPAWN PERSON AT: \" + str(place))
 
 func _on_spawn_10_people_pressed() -> void:
 	for i in range(10):
 		_on_spawn_person_pressed()
+
+
+func _on_background_check_box_toggled(toggled_on: bool) -> void:
+	$\"../UnderlyingPhoto\".visible = toggled_on
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
@@ -269,6 +272,30 @@ _data = {
 }
 point_count = 8
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
+size = Vector2(46.4385, 404.077)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1bgf"]
+size = Vector2(156.945, 694.099)
+
+[sub_resource type="Curve2D" id="Curve2D_6iyac"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2249, 200, 49.7794, -29.282, -49.7794, 29.282, 1712, 581, 57.0999, -12.4449, -57.0999, 12.4449, 1545, 657, 37.2727, -0.909091, -37.2727, 0.909091, 1344, 694, 90.4545, 2.27273, -90.4545, -2.27273, 807, 680, 50.9091, -19.0909, -50.9091, 19.0909, 621, 712, 33.6364, -23.1818, -33.6364, 23.1818, 461, 799, 0, 0, 0, 0, -150, 1271)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_fdnlq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -94, 1262, -35.75, 24.2, 35.75, -24.2, 377, 897, -45.1, 24.2, 45.1, -24.2, 517, 807, -56.1, 12.1, 56.1, -12.1, 698, 745, -52.25, -1.65, 52.25, 1.65, 840, 733, -36.3, -1.65, 36.3, 1.65, 1284, 754, -56.65, 17.05, 56.65, -17.05, 1451, 728, -37.95, 19.8, 37.95, -19.8, 1614, 666, -26.95, 18.15, 26.95, -18.15, 1722, 605, -31.9, 24.75, 31.9, -24.75, 1820, 535, -63.8, 35.2, 63.8, -35.2, 2077, 366, 0, 0, 0, 0, 2250, 288)
+}
+point_count = 12
+
+[sub_resource type="Curve2D" id="Curve2D_jkdf5"]
+_data = {
+"points": PackedVector2Array(182.945, -72.8775, -182.945, 72.8775, 2357, 178, 59.7295, -43.9519, -59.7295, 43.9519, 2038.47, 351.978, 49.7794, -29.282, -49.7794, 29.282, 1712, 581, 57.0999, -12.4449, -57.0999, 12.4449, 1542, 664, 37.2727, -0.909091, -37.2727, 0.909091, 1344, 698, 90.8302, -5.61608, -90.8302, 5.61608, 814, 677, 50.9091, -19.0909, -50.9091, 19.0909, 594, 733, 33.6364, -23.1818, -33.6364, 23.1818, 417, 829, 0, 0, 0, 0, -15, 1176)
+}
+point_count = 9
+
 [node name="Main" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -291,6 +318,14 @@ text = "Spawn person"
 [node name="Spawn10People" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Spawn 10 People"
+
+[node name="BackgroundCheckBox" type="CheckBox" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Background photo"
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
 
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -996,7 +1031,7 @@ shape = SubResource("RectangleShape2D_kry3j")
 
 [node name="Peron_1" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1043, 663)
-release_time = 30.0
+capacity = 80
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_1"]
 rotation = 0.0501757
@@ -1004,7 +1039,8 @@ shape = SubResource("RectangleShape2D_21xkr")
 
 [node name="Peron_2" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1018, 720)
-release_time = 30.0
+release_time = 20.0
+capacity = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_2"]
 rotation = 0.0501757
@@ -1012,7 +1048,8 @@ shape = SubResource("RectangleShape2D_21xkr")
 
 [node name="Peron_3" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1017, 778)
-release_time = 30.0
+release_time = 20.0
+capacity = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_3"]
 rotation = 0.0501757
@@ -1020,7 +1057,9 @@ shape = SubResource("RectangleShape2D_21xkr")
 
 [node name="Peron_5" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(452, 665)
-release_time = 30.0
+weight = 5
+release_time = 10.0
+capacity = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_5"]
 position = Vector2(2, 2)
@@ -1029,7 +1068,9 @@ shape = SubResource("RectangleShape2D_21xkr")
 
 [node name="Peron_6" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(490, 698)
-release_time = 30.0
+weight = 5
+release_time = 10.0
+capacity = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Peron_6"]
 rotation = -0.706387
@@ -1037,6 +1078,7 @@ shape = SubResource("RectangleShape2D_21xkr")
 
 [node name="Park" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(363, 92)
+release_time = 10.0
 capacity = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Park"]
@@ -1170,7 +1212,7 @@ curve = SubResource("Curve2D_6bp64")
 [node name="T1" parent="T1_Hybesova-Malinak" instance=ExtResource("7_344ge")]
 position = Vector2(-89, 543)
 rotation = -0.346992
-wait_seconds = 7
+wait_seconds = 5
 MAX_SPEED = 10
 
 [node name="Wagon" parent="T1_Hybesova-Malinak" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
@@ -1236,5 +1278,239 @@ rotation = -2.89554
 wait_seconds = 15
 initial_people = 10
 
+[node name="SlowDown2" parent="." instance=ExtResource("7_6bp64")]
+visible = false
+slow_speed = 3.0
+
+[node name="NastupisteBokem" type="CollisionShape2D" parent="SlowDown2"]
+position = Vector2(467.739, 692.858)
+rotation = 0.858698
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="HLN" type="CollisionShape2D" parent="SlowDown2"]
+position = Vector2(1042.5, 750)
+rotation = 1.60124
+shape = SubResource("RectangleShape2D_h1bgf")
+
+[node name="Station_Nadr1" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(886, 681)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Peron_1")
+get_in_ratio = 0.9
+get_out_ratio = 0.9
+
+[node name="TrainChecker" type="Area2D" parent="Station_Nadr1"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Nadr1/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(4, -22)
+
+[node name="ExitDoor2" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(32, -20)
+
+[node name="ExitDoor3" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(68, -19)
+
+[node name="ExitDoor4" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(83, -18)
+
+[node name="ExitDoor5" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(114, -16)
+
+[node name="ExitDoor6" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(139, -14)
+
+[node name="ExitDoor7" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(179, -12)
+
+[node name="ExitDoor8" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(209, -12)
+
+[node name="ExitDoor9" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(244, -11)
+
+[node name="ExitDoor10" parent="Station_Nadr1" instance=ExtResource("5_kry3j")]
+position = Vector2(271, -10)
+
+[node name="Nadr1" type="Path2D" parent="."]
+position = Vector2(1, 0)
+curve = SubResource("Curve2D_6iyac")
+
+[node name="Vlak" parent="Nadr1" instance=ExtResource("7_344ge")]
+position = Vector2(2249, 200)
+rotation = 2.52452
+wait_seconds = 20
+initial_people = 10
+MAX_SPEED = 8
+
+[node name="Wagon" parent="Nadr1" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2249, 200)
+rotation = 2.52452
+locomotive = NodePath("../Vlak")
+
+[node name="Wagon2" parent="Nadr1" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2249, 200)
+rotation = 2.52452
+locomotive = NodePath("../Vlak")
+
+[node name="Wagon3" parent="Nadr1" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2249, 200)
+rotation = 2.52452
+locomotive = NodePath("../Vlak")
+
+[node name="Wagon4" parent="Nadr1" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2249, 200)
+rotation = 2.52452
+locomotive = NodePath("../Vlak")
+
+[node name="Station_Nadr2" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(1205, 751)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Peron_2")
+get_in_ratio = 0.9
+get_out_ratio = 0.9
+
+[node name="TrainChecker" type="Area2D" parent="Station_Nadr2"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Nadr2/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-312, -36)
+
+[node name="ExitDoor2" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-284, -34)
+
+[node name="ExitDoor3" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-248, -33)
+
+[node name="ExitDoor4" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-233, -32)
+
+[node name="ExitDoor5" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-202, -30)
+
+[node name="ExitDoor6" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-177, -28)
+
+[node name="ExitDoor7" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-137, -26)
+
+[node name="ExitDoor8" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-107, -26)
+
+[node name="ExitDoor9" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-72, -25)
+
+[node name="ExitDoor10" parent="Station_Nadr2" instance=ExtResource("5_kry3j")]
+position = Vector2(-45, -24)
+
+[node name="Nadr2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_fdnlq")
+
+[node name="Vlak2" parent="Nadr2" instance=ExtResource("7_344ge")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+wait_seconds = 25
+initial_people = 10
+MAX_SPEED = 9
+
+[node name="Wagon" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+locomotive = NodePath("../Vlak2")
+
+[node name="Wagon2" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+locomotive = NodePath("../Vlak2")
+
+[node name="Wagon3" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+locomotive = NodePath("../Vlak2")
+
+[node name="Wagon4" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+locomotive = NodePath("../Vlak2")
+
+[node name="Wagon5" parent="Nadr2" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(-94, 1262)
+rotation = -0.659277
+locomotive = NodePath("../Vlak2")
+
+[node name="Station_Nadr3" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(904, 795)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Peron_3")
+get_in_ratio = 0.9
+get_out_ratio = 0.9
+
+[node name="TrainChecker" type="Area2D" parent="Station_Nadr3"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Nadr3/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(-3, -23)
+
+[node name="ExitDoor2" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(25, -21)
+
+[node name="ExitDoor3" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(61, -20)
+
+[node name="ExitDoor4" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(76, -19)
+
+[node name="ExitDoor5" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(107, -17)
+
+[node name="ExitDoor6" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(132, -15)
+
+[node name="ExitDoor7" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(172, -13)
+
+[node name="ExitDoor8" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(202, -13)
+
+[node name="ExitDoor9" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(237, -12)
+
+[node name="ExitDoor10" parent="Station_Nadr3" instance=ExtResource("5_kry3j")]
+position = Vector2(264, -11)
+
+[node name="Nadr3" type="Path2D" parent="."]
+position = Vector2(-86, 116)
+curve = SubResource("Curve2D_jkdf5")
+
+[node name="Vlak3" parent="Nadr3" instance=ExtResource("7_344ge")]
+position = Vector2(2357, 178)
+rotation = 2.7625
+wait_seconds = 15
+initial_people = 5
+MAX_SPEED = 11
+
+[node name="Wagon" parent="Nadr3" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2357, 178)
+rotation = 2.7625
+locomotive = NodePath("../Vlak3")
+
+[node name="Wagon2" parent="Nadr3" node_paths=PackedStringArray("locomotive") instance=ExtResource("8_ynf5e")]
+position = Vector2(2357, 178)
+rotation = 2.7625
+locomotive = NodePath("../Vlak3")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/BackgroundCheckBox" to="CanvasLayer" method="_on_background_check_box_toggled"]

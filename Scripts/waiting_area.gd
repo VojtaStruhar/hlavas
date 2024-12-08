@@ -6,6 +6,7 @@ class_name WaitingArea extends Area2D
 @export var capacity: int = 30
 
 @onready var release_timer: Timer = $ReleaseTimer
+@onready var label: Label = $Label
 
 var waiting_people: Array[Brnak] = []
 var waiting_collider: CollisionShape2D
@@ -32,6 +33,7 @@ func _ready() -> void:
 func on_area_entered(area: Area2D) -> void:
 	var potential_brnak = area.get_parent()
 	if potential_brnak is Brnak:
+		label.text = name + ": " + str(waiting_people.size()) + "/" + str(capacity)
 		var b = potential_brnak as Brnak
 		if b.goal == self:
 			store_person(b)
@@ -44,10 +46,7 @@ func store_person(b: Brnak) -> void:
 	var within_rect = (offset * waiting_rect.size).rotated(waiting_collider.rotation)
 	b.agent.target_position = waiting_collider.global_position + within_rect
 	
-	b.modulate = Color.CYAN
-	
 	if waiting_people.size() >= capacity:
-		print(name, " full capacity, releasing")
 		release_person()
 
 func release_person() -> void:
@@ -63,12 +62,12 @@ func release_person() -> void:
 	
 	person.goal = goal
 	person.start()
-	person.modulate = Color.WHITE
 
 func on_release_timeouot() -> void:
 	var ppl_before = waiting_people.size()
 	waiting_people = waiting_people.filter(is_instance_valid)
 	var ppl_after = waiting_people.size()
+	
 	if ppl_after < ppl_before:
 		print("[Cleanup] ", name, " ", ppl_before - ppl_after, " invalid instances")
 

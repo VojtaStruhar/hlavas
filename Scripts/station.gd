@@ -36,11 +36,14 @@ func on_train_entered(area: Area2D) -> void:
 			get_tree().current_scene.add_child.call_deferred(b)
 			b.global_position = exit.global_position
 			train.people_inside -= 1
-			await get_tree().create_timer(0.4).timeout
+			await get_tree().create_timer(0.3).timeout
 		
 		await get_tree().create_timer(1).timeout
 		
-		while waiting_area.waiting_people.size() > arrive_people_waiting * get_in_ratio:
+		
+		for i in range(ceil(arrive_people_waiting * get_in_ratio)):
+			if waiting_area.waiting_people.size() == 0:
+				break
 			var p = waiting_area.waiting_people.pop_front()
 			if not is_instance_valid(p):
 				continue
@@ -51,6 +54,4 @@ func on_train_entered(area: Area2D) -> void:
 		
 		await get_tree().create_timer(1).timeout
 		train.current_speed = arrive_speed
-
-func on_train_stationed(train) -> void:
-	pass
+		print(name, ": took away ", arrive_people_waiting - waiting_area.waiting_people.size(), " people")
