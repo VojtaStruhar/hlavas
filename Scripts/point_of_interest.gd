@@ -1,6 +1,9 @@
 @icon("res://Assets/poi_icon.png")
 class_name PointOfInterest extends Area2D
 
+@export var weight: int = 10
+@export var release_period: int = 3
+
 @onready var release_timer: Timer = $ReleaseTimer
 
 var exits: Array[ExitDoor] = []
@@ -9,9 +12,12 @@ var people_inside: int = 0
 const BRNAK_TEMPLATE = preload("res://Scenes/brnak.tscn")
 
 func _ready() -> void:
-	PlacesManager.places.append(self)
+	PlacesManager.register(self, weight)
 	
+	
+	release_timer.wait_time = release_period
 	release_timer.timeout.connect(release_person)
+	
 	self.area_entered.connect(on_area_entered)
 	
 	for child in get_children():

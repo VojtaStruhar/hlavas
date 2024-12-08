@@ -10,10 +10,8 @@ var SPEED = 20
 func _ready() -> void:
 	SPEED += randi_range(-3, 3)
 	
-	goal = PlacesManager.places.pick_random()
+	goal = PlacesManager.get_random()
 	print("Heading to ", goal.name)
-	
-	agent.navigation_finished.connect(on_arrive)
 	
 	if goal:
 		start.call_deferred()
@@ -27,6 +25,3 @@ func _physics_process(delta: float) -> void:
 	
 	var next_pos = agent.get_next_path_position()
 	position = position.move_toward(next_pos, delta * SPEED)
-
-func on_arrive() -> void:
-	print(name, " arrived")
