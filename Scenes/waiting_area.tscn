@@ -8,7 +8,3 @@ script = ExtResource("1_au1ep")
 [node name="ReleaseTimer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
-
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0

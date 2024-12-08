@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=66 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
@@ -9,41 +9,55 @@
 [ext_resource type="Script" uid="uid://cif27233raih3" path="res://Scripts/station.gd" id="8_344ge"]
 [ext_resource type="PackedScene" uid="uid://dtkob2dormtjh" path="res://Scenes/wagon.tscn" id="8_ynf5e"]
 
+[sub_resource type="Gradient" id="Gradient_344ge"]
+colors = PackedColorArray(0, 0, 0.0392157, 1, 0, 0, 0.0392157, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ynf5e"]
+gradient = SubResource("Gradient_344ge")
+width = 2
+
 [sub_resource type="GDScript" id="GDScript_kry3j"]
 resource_name = "debug_ui"
 script/source = "extends CanvasLayer
 
-@onready var people_label: Label = $VBoxContainer/PeopleLabel
-@onready var people_inside_label: Label = $VBoxContainer/PeopleInsideLabel
-@onready var fps_label: Label = $VBoxContainer/FPSLabel
+@onready var people_label: Label = %PeopleLabel
+@onready var people_inside_label: Label = %PeopleInsideLabel
+@onready var fps_label: Label = %FPSLabel
+@onready var background_check_box: CheckBox = %BackgroundCheckBox
+@onready var colored_people_checkbox: CheckBox = %ColoredPeopleCheckbox
+
+@onready var bg = $\"../UnderlyingPhoto\"
 
 const BRNAK = preload(\"res://Scenes/brnak.tscn\")
 
+func _ready() -> void:
+	visible = false
+	bg.modulate.a = 1 if Settings.background_photo else 0
+	
+	background_check_box.button_pressed = Settings.background_photo
+	colored_people_checkbox.button_pressed = Settings.colored_people
+	
+	background_check_box.toggled.connect(_on_background_check_box_toggled)
+	colored_people_checkbox.toggled.connect(_on_colored_people_checkbox_toggled)
+
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"toggle_options\"):
+		visible = not visible
+	
 	people_label.text = \"People: \" + str(Stats.people_outside)
 	people_inside_label.text = \"In shops: \" + str(Stats.people_inside)
 	fps_label.text = \"FPS: \" + str(Engine.get_frames_per_second())
 
-func _on_spawn_person_pressed() -> void:
-	var place = PlacesManager.get_random()
-	
-	if place is PointOfInterest:
-		place.people_inside += 1
-		Stats.people_inside += 1
-	elif place is WaitingArea:
-		var b = BRNAK.instantiate()
-		get_tree().current_scene.add_child(b)
-		b.global_position = place.global_position
-	else:
-		push_error(\"FAILED TO SPAWN PERSON AT: \" + str(place))
-
-func _on_spawn_10_people_pressed() -> void:
-	for i in range(10):
-		_on_spawn_person_pressed()
-
 
 func _on_background_check_box_toggled(toggled_on: bool) -> void:
-	$\"../UnderlyingPhoto\".visible = toggled_on
+	Settings.background_photo = toggled_on
+	var t = create_tween()
+	t.tween_property(bg, \"modulate:a\", 1 if toggled_on else 0, 1.0).set_ease(Tween.EASE_IN_OUT)
+	
+
+
+func _on_colored_people_checkbox_toggled(toggled_on: bool) -> void:
+	Settings.colored_people = toggled_on
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
@@ -113,10 +127,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(979, 330, 1009, 340, 99
 agent_radius = 2.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nerr0"]
-vertices = PackedVector2Array(195.352, 13.2266, 234.539, -26.75, 238.156, 33.8828, 280.703, 66.2109, 293.148, 53.5234, 267.93, 145.344, 256.867, 146.648, 304.391, 165.859, 304.781, 150.422, 373.094, 182.773, 299.047, 177.422, 347.75, 16.5, 419.844, 28.2109)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(3, 2, 4), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 6, 5, 8, 9), PackedInt32Array(9, 10, 7), PackedInt32Array(11, 12, 9, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(345, 12, 425, 25, 376, 187, 293, 181, 299, 168, 252, 149, 276, 68, 189, 14, 238, -36, 242, 31, 298, 51, 273, 142, 302, 146)])
-agent_radius = 4.0
+vertices = PackedVector2Array(192.172, 13.6094, 236.539, -31.6484, 244.156, 27.3281, 278.352, 67.1094, 295.617, 52.0703, 270.469, 143.672, 254.43, 147.828, 301.703, 166.93, 303.391, 148.211, 374.547, 184.891, 296.023, 179.211, 346.367, 14.2422, 422.422, 26.6016)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2, 4), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 6, 5, 8, 9), PackedInt32Array(9, 10, 7), PackedInt32Array(11, 12, 9, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(345, 12, 425, 25, 376, 187, 293, 181, 299, 168, 252, 149, 276, 68, 189, 14, 238, -36, 246, 26, 298, 51, 273, 142, 302, 146)])
+agent_radius = 2.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_74g3j"]
 vertices = PackedVector2Array(334.727, 261.922, 333.172, 286.102, 283.477, 303.594, 257.297, 287.219, 282.656, 261.023)
@@ -298,34 +312,64 @@ point_count = 9
 
 [node name="Main" type="Node2D"]
 
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture1D_ynf5e")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_kry3j")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.5
+offset_top = -66.0
+offset_right = 95.5
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PeopleLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="PeopleInsideLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="PeopleLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "People outside"
 
-[node name="SpawnPerson" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="PeopleInsideLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Spawn person"
+text = "People in shops"
 
-[node name="Spawn10People" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="FPSLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Spawn 10 People"
+text = "FPS"
 
-[node name="BackgroundCheckBox" type="CheckBox" parent="CanvasLayer/VBoxContainer"]
+[node name="BackgroundCheckBox" type="CheckBox" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-button_pressed = true
 text = "Background photo"
 
-[node name="FPSLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="ColoredPeopleCheckbox" type="CheckBox" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "Colored dots"
 
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -902,13 +946,14 @@ position = Vector2(-1, 8)
 position = Vector2(159, 13)
 
 [node name="Katedrala" parent="Shops" instance=ExtResource("4_jjvhh")]
-position = Vector2(205, -12)
+position = Vector2(213, -6)
 visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Katedrala"]
 shape = SubResource("CircleShape2D_wsu2k")
 
 [node name="ExitDoor" parent="Shops/Katedrala" instance=ExtResource("5_kry3j")]
+position = Vector2(-11, 18)
 
 [node name="ExitDoor2" parent="Shops/Katedrala" instance=ExtResource("5_kry3j")]
 position = Vector2(157, -42)
@@ -1569,7 +1614,3 @@ locomotive = NodePath("../Vlak3")
 position = Vector2(2357, 178)
 rotation = 2.7625
 locomotive = NodePath("../Vlak3")
-
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]
-[connection signal="toggled" from="CanvasLayer/VBoxContainer/BackgroundCheckBox" to="CanvasLayer" method="_on_background_check_box_toggled"]

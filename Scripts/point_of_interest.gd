@@ -50,6 +50,6 @@ func release_person() -> void:
 	var b = BRNAK_TEMPLATE.instantiate()
 	var exit = exits.pick_random()
 	
-	get_tree().current_scene.add_child(b)
+	get_tree().current_scene.add_child.call_deferred(b)
 	b.global_position = exit.global_position
 	

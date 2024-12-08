@@ -8,7 +8,6 @@ class_name WaitingArea extends Area2D
 @export var visitor_color: Color = Color.WHITE
 
 @onready var release_timer: Timer = $ReleaseTimer
-@onready var label: Label = $Label
 
 var waiting_people: Array[Brnak] = []
 var waiting_collider: CollisionShape2D
@@ -35,7 +34,6 @@ func _ready() -> void:
 func on_area_entered(area: Area2D) -> void:
 	var potential_brnak = area.get_parent()
 	if potential_brnak is Brnak:
-		label.text = name + ": " + str(waiting_people.size()) + "/" + str(capacity)
 		var b = potential_brnak as Brnak
 		if b.goal == self:
 			store_person(b)
