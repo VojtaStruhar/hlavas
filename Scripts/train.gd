@@ -2,6 +2,7 @@
 class_name Train extends PathFollow2D
 
 
+
 const MAX_SPEED = 15
 
 var current_speed = 0

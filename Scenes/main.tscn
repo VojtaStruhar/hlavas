@@ -824,9 +824,10 @@ position = Vector2(1152, 400)
 curve = SubResource("Curve2D_d1ilt")
 script = ExtResource("4_21xkr")
 
-[node name="Station_Top_West" type="Node2D" parent="."]
+[node name="Station_Top_West" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
 position = Vector2(1152, 411)
 script = ExtResource("8_344ge")
+waiting_area = NodePath("../Hlavas_Salina1")
 
 [node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
 collision_layer = 0
@@ -834,6 +835,21 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
 shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(0, -9)
+
+[node name="ExitDoor2" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(15, -9)
+
+[node name="ExitDoor3" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(29, -9)
+
+[node name="ExitDoor4" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(41, -9)
+
+[node name="ExitDoor5" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(41, -9)
 
 [node name="SlowDown" parent="." instance=ExtResource("7_6bp64")]
 visible = false
