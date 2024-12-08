@@ -10,7 +10,7 @@ radius = 5.0
 script = ExtResource("1_5sujq")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 10.0
+path_desired_distance = 15.0
 navigation_layers = 3
 avoidance_enabled = true
 radius = 8.0
