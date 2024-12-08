@@ -32,12 +32,15 @@ func on_area_entered(area: Area2D) -> void:
 		if brnak.goal == self:
 			brnak.queue_free()
 			people_inside += 1
+			Stats.people_inside += 1
 
 func release_person() -> void:
 	if people_inside == 0:
 		return
 	
 	people_inside -= 1
+	Stats.people_inside -= 1
+	
 	var b = BRNAK_TEMPLATE.instantiate()
 	var exit = exits.pick_random()
 	

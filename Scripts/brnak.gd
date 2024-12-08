@@ -23,3 +23,9 @@ func _physics_process(delta: float) -> void:
 	
 	var next_pos = agent.get_next_path_position()
 	position = position.move_toward(next_pos, delta * SPEED)
+
+func _enter_tree() -> void:
+	Stats.people_outside += 1
+
+func _exit_tree() -> void:
+	Stats.people_outside -= 1

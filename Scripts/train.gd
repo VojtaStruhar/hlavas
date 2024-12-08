@@ -1,25 +1,28 @@
 @icon("res://Assets/tram_icon.png")
 class_name Train extends PathFollow2D
 
+@export var wait_seconds = 10
+@export var initial_people = 20
+@export var MAX_SPEED = 15
 
-
-const MAX_SPEED = 15
-
-var current_speed = 0
 var people_inside = 0
+var current_speed = 0
 
 func _ready() -> void:
-	loop = false
+	setup()
+
+func setup() -> void:
 	progress_ratio = 0
 	current_speed = MAX_SPEED
-
+	people_inside = initial_people
 
 func _process(delta: float) -> void:
 	progress += get_speed() * delta
 
 	if progress_ratio >= 1:
-		print("Freeing a train with ", people_inside, " people inside!")
-		queue_free()
+		current_speed = 0
+		progress_ratio = 0
+		get_tree().create_timer(wait_seconds).timeout.connect(setup)
 
 
 func get_speed() -> float:

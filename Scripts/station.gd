@@ -20,8 +20,8 @@ func _ready() -> void:
 
 func on_train_entered(area: Area2D) -> void:
 	var train = area.get_parent()
+	
 	if train is Train:
-		print(name, " train entered")
 		var arrive_speed = train.current_speed
 		var arrive_people_waiting = waiting_area.waiting_people.size()
 		var arrive_people_in_train = train.people_inside
@@ -30,8 +30,6 @@ func on_train_entered(area: Area2D) -> void:
 		
 		await get_tree().create_timer(1).timeout
 		
-		
-		print(name, " Unloading...")
 		for i in range(ceil(arrive_people_in_train * get_out_ratio)):
 			var b = BRNAK.instantiate()
 			var exit = train_exits.pick_random()
@@ -42,16 +40,15 @@ func on_train_entered(area: Area2D) -> void:
 		
 		await get_tree().create_timer(1).timeout
 		
-		print(name, " Loading...")
 		while waiting_area.waiting_people.size() > arrive_people_waiting * get_in_ratio:
-			var p = waiting_area.waiting_people.pop_front() as Brnak
+			var p = waiting_area.waiting_people.pop_front()
+			if not is_instance_valid(p):
+				continue
 			p.queue_free()
 			train.people_inside += 1
 			await get_tree().create_timer(0.4).timeout
 		
 		
-		
-		print(name, " Done!")
 		await get_tree().create_timer(1).timeout
 		train.current_speed = arrive_speed
 

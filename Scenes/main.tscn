@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=52 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="Script" uid="uid://b1gnnulmc0jev" path="res://Scripts/railway.gd" id="4_21xkr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/exit_door.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://c1dldr3cw2kje" path="res://Scenes/waiting_area.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bj6l5nb2bqucp" path="res://Scenes/slow_down.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://ckvg3qcsrljon" path="res://Scenes/salina.tscn" id="7_344ge"]
 [ext_resource type="Script" uid="uid://cif27233raih3" path="res://Scripts/station.gd" id="8_344ge"]
 
 [sub_resource type="GDScript" id="GDScript_kry3j"]
@@ -13,17 +14,19 @@ resource_name = "debug_ui"
 script/source = "extends CanvasLayer
 
 @onready var people_label: Label = $VBoxContainer/PeopleLabel
+@onready var people_inside_label: Label = $VBoxContainer/PeopleInsideLabel
 
 const BRNAK = preload(\"res://Scenes/brnak.tscn\")
 
-var people_count = 0:
-	set(v):
-		people_count = v
-		people_label.text = \"People: \" + str(v)
+var people_count = 0
+
+func _process(delta: float) -> void:
+	people_label.text = \"People: \" + str(Stats.people_outside)
+	people_inside_label.text = \"In shops: \" + str(Stats.people_inside)
 
 func _on_spawn_person_pressed() -> void:
 	var place = PlacesManager.get_random()
-	print(\"Spawning at \", place.name)
+	
 	if place is PointOfInterest:
 		place.people_inside += 1
 		people_count += 1
@@ -38,10 +41,6 @@ func _on_spawn_person_pressed() -> void:
 func _on_spawn_10_people_pressed() -> void:
 	for i in range(10):
 		_on_spawn_person_pressed()
-
-
-func _on_spawn_train_pressed() -> void:
-	TrainManager.deploy_random()
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
@@ -69,9 +68,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1447, 643, 1435, 537, 1
 agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_caly8"]
-vertices = PackedVector2Array(1007.52, 320.648, 955.023, 117.453, 1000.01, 112.352, 1057.86, 329.773, 1073.37, 371.008, 1427.29, 358.109, 1434.63, 374.977, 1642.37, 211.328, 1628.38, 193.672)
+vertices = PackedVector2Array(1007.52, 320.648, 955.023, 117.453, 1000.01, 112.352, 1057.86, 329.773, 1073.37, 371.008, 1427.27, 358.109, 1434.62, 374.977, 1799.32, 86.3828, 1786.4, 70.5938)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(7, 6, 5, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1629, 188, 1648, 212, 1436, 379, 1072, 375, 1004, 323, 950, 114, 1003, 108, 1061, 326, 1426, 354)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1787, 65, 1805, 87, 1436, 379, 1072, 375, 1004, 323, 950, 114, 1003, 108, 1061, 326, 1426, 354)])
 agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_isvcn"]
@@ -164,6 +163,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-63, 441, -35, 473, 128, 413, 144, 375, 123, 333, 99, 306, 4, 377, -24, 380, -85, 319)])
 agent_radius = 4.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ynf5e"]
+vertices = PackedVector2Array(291, 405.008, 291, 395.023, 532, 400.969, 515, 409.023, 532, 442.969, 515, 431.023, 291, 438.023, 291, 426.023)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(290, 425, 290, 439, 533, 444, 533, 400, 290, 394, 290, 406, 514, 410, 514, 430)])
+agent_radius = 1.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_21xkr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdnlq"]
@@ -198,6 +203,9 @@ radius = 15.2971
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynf5e"]
 size = Vector2(210, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
+size = Vector2(20, 14)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_344ge"]
 size = Vector2(210, 24)
 
@@ -210,17 +218,17 @@ size = Vector2(398, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bp64"]
 size = Vector2(136.014, 73.2761)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdnlq"]
+size = Vector2(140, 10)
+
 [sub_resource type="Curve2D" id="Curve2D_d1ilt"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1105, 377, 38.4971, 15.2126, -38.4971, -15.2126, 831, 309, 22.0427, 24.5264, -22.0427, -24.5264, 717, 228, 0, 0, 0, 0, 599, 82, 25.7682, 10.2452, -25.7682, -10.2452, 547, 44, 0, 0, 0, 0, 385, 30, 34.4611, 2.17322, -34.4611, -2.17322, 320, 26, 23.595, -1.24184, -23.595, 1.24184, 235, 12, 0, 0, 0, 0, 0, 12, 30.7895, -0.466507, -30.7895, 0.466507, -56, 13, 17.9605, -0.699761, -17.9605, 0.699761, -118, 31, 27.2907, 0, -27.2907, 0, -854, 12, 17.7273, 13.2955, -17.7273, -13.2955, -931, -4, 0, 0, 0, 0, -975, -46, 28.2237, 23.3254, -28.2237, -23.3254, -1148, -237, 0, 0, 0, 0, -1220, -297)
 }
 point_count = 16
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
-size = Vector2(20, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1ilt"]
-size = Vector2(404, 116)
+size = Vector2(462, 116)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iyac"]
 size = Vector2(318, 116)
@@ -237,6 +245,9 @@ offset_bottom = 40.0
 [node name="PeopleLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
+[node name="PeopleInsideLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
 [node name="SpawnPerson" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Spawn person"
@@ -244,10 +255,6 @@ text = "Spawn person"
 [node name="Spawn10People" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Spawn 10 People"
-
-[node name="SpawnTrain" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Spawn a Train"
 
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -391,7 +398,8 @@ end_position = Vector2(-51, -70)
 
 [node name="Schody_Letmo_Vedle" type="NavigationLink2D" parent="Links"]
 position = Vector2(1598, 224)
-end_position = Vector2(-75, -101)
+start_position = Vector2(1, 2)
+end_position = Vector2(-77, -100)
 
 [node name="Schody_Letmo_Nahoru" type="NavigationLink2D" parent="Links"]
 position = Vector2(1412, 325)
@@ -493,7 +501,23 @@ end_position = Vector2(-17, 19)
 [node name="NoveSady_Prechod" type="NavigationLink2D" parent="Links"]
 position = Vector2(289, 375)
 start_position = Vector2(-6, 3)
-end_position = Vector2(-9, 110)
+end_position = Vector2(-9, 113)
+
+[node name="NoveSady_Prechod2" type="NavigationLink2D" parent="Links"]
+position = Vector2(524, 385)
+end_position = Vector2(0, 20)
+
+[node name="NoveSady_Prechod4" type="NavigationLink2D" parent="Links"]
+position = Vector2(299, 379)
+end_position = Vector2(0, 20)
+
+[node name="NoveSady_Prechod3" type="NavigationLink2D" parent="Links"]
+position = Vector2(523, 436)
+end_position = Vector2(0, 58)
+
+[node name="NoveSady_Prechod5" type="NavigationLink2D" parent="Links"]
+position = Vector2(297, 432)
+end_position = Vector2(0, 58)
 
 [node name="ChodnikyUDrahy" type="NavigationLink2D" parent="Links"]
 position = Vector2(252, 488)
@@ -608,6 +632,10 @@ use_edge_connections = false
 navigation_polygon = SubResource("NavigationPolygon_344ge")
 use_edge_connections = false
 
+[node name="NoveSady_Nastupiste1" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_ynf5e")
+use_edge_connections = false
+
 [node name="Shops" type="Node2D" parent="."]
 
 [node name="KFC" parent="Shops" instance=ExtResource("4_jjvhh")]
@@ -630,6 +658,7 @@ position = Vector2(1, -2)
 
 [node name="Dornych" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1256, 971)
+weight = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Dornych"]
 shape = SubResource("CircleShape2D_kry3j")
@@ -645,11 +674,24 @@ position = Vector2(18, 1)
 
 [node name="Vankovka" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1332, 1127)
+weight = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Vankovka"]
 shape = SubResource("CircleShape2D_6bp64")
 
 [node name="ExitDoor" parent="Shops/Vankovka" instance=ExtResource("5_kry3j")]
+
+[node name="VankovkaSpodem" parent="Shops" instance=ExtResource("4_jjvhh")]
+position = Vector2(594, 1125)
+weight = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/VankovkaSpodem"]
+shape = SubResource("CircleShape2D_6bp64")
+
+[node name="ExitDoor" parent="Shops/VankovkaSpodem" instance=ExtResource("5_kry3j")]
+
+[node name="ExitDoor-Dornych" parent="Shops/VankovkaSpodem" instance=ExtResource("5_kry3j")]
+position = Vector2(745, 0)
 
 [node name="NaDraze" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(51, 629)
@@ -676,6 +718,17 @@ shape = SubResource("CircleShape2D_344ge")
 
 [node name="ExitDoor" parent="Shops/Anapurna" instance=ExtResource("5_kry3j")]
 position = Vector2(4, 2)
+
+[node name="GrandHotel" parent="Shops" instance=ExtResource("4_jjvhh")]
+position = Vector2(1711, 125)
+release_period = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/GrandHotel"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_344ge")
+
+[node name="ExitDoor" parent="Shops/GrandHotel" instance=ExtResource("5_kry3j")]
+position = Vector2(4, 5)
 
 [node name="Letmo" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1425, 281)
@@ -749,6 +802,33 @@ position = Vector2(1152, 400)
 position = Vector2(95, 0)
 shape = SubResource("RectangleShape2D_ynf5e")
 
+[node name="Station_Top_West" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(1152, 411)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Hlavas_Salina1")
+
+[node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(0, -9)
+
+[node name="ExitDoor2" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(15, -9)
+
+[node name="ExitDoor3" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(29, -9)
+
+[node name="ExitDoor4" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(41, -9)
+
+[node name="ExitDoor5" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
+position = Vector2(41, -9)
+
 [node name="Hlavas_Salina2" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(1155, 447)
 capacity = 60
@@ -819,43 +899,67 @@ capacity = 20
 rotation = -1.27591
 shape = SubResource("RectangleShape2D_6bp64")
 
+[node name="NoveSady_West" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(361, 402)
+release_time = 20.0
+capacity = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoveSady_West"]
+rotation = 0.0305743
+shape = SubResource("RectangleShape2D_fdnlq")
+
+[node name="Station_NoveSady_West" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
+position = Vector2(296, 407)
+script = ExtResource("8_344ge")
+waiting_area = NodePath("../Hlavas_Salina1")
+get_in_ratio = 0.3
+get_out_ratio = 0.7
+
+[node name="TrainChecker" type="Area2D" parent="Station_NoveSady_West"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_NoveSady_West/TrainChecker"]
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="ExitDoor" parent="Station_NoveSady_West" instance=ExtResource("5_kry3j")]
+position = Vector2(109, -3)
+
+[node name="ExitDoor2" parent="Station_NoveSady_West" instance=ExtResource("5_kry3j")]
+position = Vector2(15, -7)
+
+[node name="ExitDoor3" parent="Station_NoveSady_West" instance=ExtResource("5_kry3j")]
+position = Vector2(35, -6)
+
+[node name="ExitDoor4" parent="Station_NoveSady_West" instance=ExtResource("5_kry3j")]
+position = Vector2(56, -7)
+
+[node name="ExitDoor5" parent="Station_NoveSady_West" instance=ExtResource("5_kry3j")]
+position = Vector2(91, -4)
+
+[node name="NoveSady_East" parent="." instance=ExtResource("6_6bp64")]
+position = Vector2(445, 435)
+release_time = 20.0
+capacity = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoveSady_East"]
+rotation = 0.0305743
+shape = SubResource("RectangleShape2D_fdnlq")
+
 [node name="T12_Vlhka-Silingrak" type="Path2D" parent="."]
 position = Vector2(1152, 400)
 curve = SubResource("Curve2D_d1ilt")
 script = ExtResource("4_21xkr")
 
-[node name="Station_Top_West" type="Node2D" parent="." node_paths=PackedStringArray("waiting_area")]
-position = Vector2(1152, 411)
-script = ExtResource("8_344ge")
-waiting_area = NodePath("../Hlavas_Salina1")
-
-[node name="TrainChecker" type="Area2D" parent="Station_Top_West"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Station_Top_West/TrainChecker"]
-shape = SubResource("RectangleShape2D_hptm8")
-
-[node name="ExitDoor" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
-position = Vector2(0, -9)
-
-[node name="ExitDoor2" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
-position = Vector2(15, -9)
-
-[node name="ExitDoor3" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
-position = Vector2(29, -9)
-
-[node name="ExitDoor4" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
-position = Vector2(41, -9)
-
-[node name="ExitDoor5" parent="Station_Top_West" instance=ExtResource("5_kry3j")]
-position = Vector2(41, -9)
+[node name="T12" parent="T12_Vlhka-Silingrak" instance=ExtResource("7_344ge")]
+position = Vector2(1105, 377)
+rotation = -2.89833
 
 [node name="SlowDown" parent="." instance=ExtResource("7_6bp64")]
-visible = false
 position = Vector2(1267, 445)
 
 [node name="Hlavas" type="CollisionShape2D" parent="SlowDown"]
+position = Vector2(-29, 0)
 shape = SubResource("RectangleShape2D_d1ilt")
 
 [node name="NoveSady" type="CollisionShape2D" parent="SlowDown"]
@@ -864,4 +968,3 @@ shape = SubResource("RectangleShape2D_6iyac")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnPerson" to="CanvasLayer" method="_on_spawn_person_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Spawn10People" to="CanvasLayer" method="_on_spawn_10_people_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SpawnTrain" to="CanvasLayer" method="_on_spawn_train_pressed"]
