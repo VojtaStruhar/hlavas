@@ -2,6 +2,8 @@
 class_name WaitingArea extends Area2D
 
 @export var weight: int = 10
+@export var release_time: float = 15
+@export var capacity: int = 30
 
 @onready var release_timer: Timer = $ReleaseTimer
 
@@ -36,23 +38,32 @@ func on_area_entered(area: Area2D) -> void:
 
 
 func store_person(b: Brnak) -> void:
-	print(name, " Storing person")
 	waiting_people.append(b)
 	# Place the guy somewhere on the platform
 	var offset = Vector2(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5))
-	b.agent.target_position = waiting_collider.global_position + offset * waiting_rect.size
-
+	var within_rect = (offset * waiting_rect.size).rotated(waiting_collider.rotation)
+	b.agent.target_position = waiting_collider.global_position + within_rect
+	
+	b.modulate = Color.CYAN
+	
+	if waiting_people.size() >= capacity:
+		print(name, " full capacity, releasing")
+		release_person()
 
 func release_person() -> void:
-	print(name, " Releasing person")
-	var person = waiting_people.pop_front() as Brnak
-	var goal = PlacesManager.get_random()
+	var person = waiting_people.pop_front()
 	
+	if not is_instance_valid(person):
+		push_warning("Trying to release invalid person??")
+		return
+	
+	var goal = PlacesManager.get_random()
 	while goal == self: # Don't go back to me!!!
 		goal = PlacesManager.get_random()
 	
 	person.goal = goal
 	person.start()
+	person.modulate = Color.WHITE
 
 func on_release_timeouot() -> void:
 	if waiting_people.size() > 0:
