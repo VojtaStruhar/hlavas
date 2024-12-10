@@ -1,6 +1,7 @@
-[gd_scene load_steps=66 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=68 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
+[ext_resource type="Texture2D" uid="uid://bt0127qrq0ua5" path="res://Assets/brno_google_earth_2_bw.png" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://cfrdvxst7bm3f" path="res://Scenes/point_of_interest.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bvytrapye3cw8" path="res://Scenes/exit_door.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://c1dldr3cw2kje" path="res://Scenes/waiting_area.tscn" id="6_6bp64"]
@@ -26,13 +27,15 @@ script/source = "extends CanvasLayer
 @onready var background_check_box: CheckBox = %BackgroundCheckBox
 @onready var colored_people_checkbox: CheckBox = %ColoredPeopleCheckbox
 
-@onready var bg = $\"../UnderlyingPhoto\"
+
+@onready var bw_image = $\"../UnderlyingPhoto/BrnoBlackAndWhite\"
+@onready var brno_colored: Sprite2D = $\"../UnderlyingPhoto/BrnoColored\"
 
 const BRNAK = preload(\"res://Scenes/brnak.tscn\")
 
 func _ready() -> void:
 	visible = false
-	bg.modulate.a = 1 if Settings.background_photo else 0
+	brno_colored.modulate.a = 1 if Settings.background_photo else 0
 	
 	background_check_box.button_pressed = Settings.background_photo
 	colored_people_checkbox.button_pressed = Settings.colored_people
@@ -52,12 +55,29 @@ func _process(delta: float) -> void:
 func _on_background_check_box_toggled(toggled_on: bool) -> void:
 	Settings.background_photo = toggled_on
 	var t = create_tween()
-	t.tween_property(bg, \"modulate:a\", 1 if toggled_on else 0, 1.0).set_ease(Tween.EASE_IN_OUT)
-	
+	t.tween_property(brno_colored, \"modulate:a\", 1 if toggled_on else 0, 1.0).set_ease(Tween.EASE_IN_OUT)
 
 
 func _on_colored_people_checkbox_toggled(toggled_on: bool) -> void:
 	Settings.colored_people = toggled_on
+"
+
+[sub_resource type="GDScript" id="GDScript_ynf5e"]
+resource_name = "BackgroundToggleTimer"
+script/source = "extends Timer
+
+var bg: Sprite2D
+var bg_visible: bool = false
+
+func _ready() -> void:
+	bg = get_parent()
+	bg.modulate.a = 0
+	timeout.connect(_toggle_bg)
+
+func _toggle_bg() -> void:
+	bg_visible = not bg_visible
+	var t = create_tween()
+	t.tween_property(bg, \"modulate:a\", 0.15 if bg_visible else 0, 5.0).set_ease(Tween.EASE_IN_OUT)
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
@@ -276,7 +296,7 @@ point_count = 18
 
 [sub_resource type="Curve2D" id="Curve2D_ynf5e"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1990, -54, 16.1949, -15.6682, -16.1949, 15.6682, 1803, 102, 18.5648, -15.5365, -18.5648, 15.5365, 1732, 180, 5.54954, -4.24377, -5.54954, 4.24377, 1453, 399, 11.0991, -2.17629, -11.0991, 2.17629, 1428, 411, 0, 0, 0, 0, 1382, 414, 0, 0, 0, 0, 1149, 413, 16.0875, 0.846711, -16.0875, -0.846711, 1125, 413, 12.4184, 15.2408, -12.4184, -15.2408, 1069, 391, 4.79803, 16.3697, -4.79803, -16.3697, 1041, 330, 2.54013, 12.9829, -2.54013, -12.9829, 987, 115, -8.18487, 19.7566, 8.18487, -19.7566, 996, 62, 0, 0, 0, 0, 1037, -49)
+"points": PackedVector2Array(0, 0, 0, 0, 1990, -54, 16.1949, -15.6682, -16.1949, 15.6682, 1803, 102, 18.5648, -15.5365, -18.5648, 15.5365, 1732, 180, 5.54954, -4.24377, -5.54954, 4.24377, 1453, 399, 11.0991, -2.17629, -11.0991, 2.17629, 1428, 411, 0, 0, 0, 0, 1382, 414, 0, 0, 0, 0, 1149, 413, 16.0875, 0.846711, -16.0875, -0.846711, 1125, 413, 12.4184, 15.2408, -12.4184, -15.2408, 1069, 391, 4.79803, 16.3697, -4.79803, -16.3697, 1041, 330, 2.54013, 12.9829, -2.54013, -12.9829, 987, 115, -8.18487, 19.7566, 8.18487, -19.7566, 996, 62, 0, 0, 0, 0, 1087, -198)
 }
 point_count = 13
 
@@ -374,7 +394,17 @@ text = "Colored dots"
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 
-[node name="BrnoGoogleEarth2" type="Sprite2D" parent="UnderlyingPhoto"]
+[node name="BrnoBlackAndWhite" type="Sprite2D" parent="UnderlyingPhoto"]
+position = Vector2(1085, 536)
+scale = Vector2(1.22029, 1.22029)
+texture = ExtResource("1_344ge")
+
+[node name="Timer" type="Timer" parent="UnderlyingPhoto/BrnoBlackAndWhite"]
+wait_time = 30.0
+autostart = true
+script = SubResource("GDScript_ynf5e")
+
+[node name="BrnoColored" type="Sprite2D" parent="UnderlyingPhoto"]
 position = Vector2(1085, 536)
 scale = Vector2(1.22029, 1.22029)
 texture = ExtResource("1_42f77")
@@ -766,7 +796,7 @@ position = Vector2(-4, 4)
 
 [node name="Kebab" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1426, 353)
-weight = 6
+weight = 7
 visitor_color = Color(1, 0.141176, 0.337255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Kebab"]
@@ -889,6 +919,7 @@ position = Vector2(4, 5)
 
 [node name="Letmo" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1425, 281)
+weight = 20
 visitor_color = Color(0.47975, 0.619264, 0.954903, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Letmo"]
@@ -905,6 +936,7 @@ position = Vector2(-29, -38)
 
 [node name="Zelnak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(773, -58)
+weight = 15
 visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Zelnak"]
@@ -921,6 +953,7 @@ position = Vector2(-421, 47)
 
 [node name="Svobodak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1031, -46)
+weight = 20
 visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Svobodak"]
@@ -934,6 +967,7 @@ position = Vector2(11, 8)
 
 [node name="Malinak" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1528, -24)
+weight = 20
 visitor_color = Color(0.976038, 0.891728, 0.42423, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Malinak"]
@@ -1189,6 +1223,7 @@ shape = SubResource("RectangleShape2D_6bp64")
 
 [node name="NoveSady_West" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(361, 402)
+weight = 5
 release_time = 20.0
 capacity = 15
 visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
@@ -1228,6 +1263,7 @@ position = Vector2(91, -4)
 
 [node name="NoveSady_East" parent="." instance=ExtResource("6_6bp64")]
 position = Vector2(445, 435)
+weight = 5
 release_time = 20.0
 capacity = 15
 visitor_color = Color(0.55605, 0.784559, 0.423546, 1)
