@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dwt8hh41wlhih"]
+[gd_scene load_steps=76 format=3 uid="uid://dwt8hh41wlhih"]
 
 [ext_resource type="Texture2D" uid="uid://buikkxvhvo645" path="res://Assets/brno_google_earth_2.png" id="1_42f77"]
 [ext_resource type="Texture2D" uid="uid://bt0127qrq0ua5" path="res://Assets/brno_google_earth_2_bw.png" id="1_344ge"]
@@ -16,6 +16,32 @@ colors = PackedColorArray(0, 0, 0.0392157, 1, 0, 0, 0.0392157, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ynf5e"]
 gradient = SubResource("Gradient_344ge")
 width = 2
+
+[sub_resource type="Gradient" id="Gradient_ynf5e"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hptm8"]
+gradient = SubResource("Gradient_ynf5e")
+
+[sub_resource type="Gradient" id="Gradient_hptm8"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d1ilt"]
+gradient = SubResource("Gradient_hptm8")
+
+[sub_resource type="Gradient" id="Gradient_d1ilt"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6iyac"]
+gradient = SubResource("Gradient_d1ilt")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_6iyac"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fdnlq"]
+gradient = SubResource("Gradient_6iyac")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="GDScript" id="GDScript_kry3j"]
 resource_name = "debug_ui"
@@ -213,6 +239,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(290, 425, 290, 439, 533
 agent_radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21xkr"]
+radius = 20.025
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdnlq"]
 radius = 9.0
@@ -339,6 +366,43 @@ offset_bottom = 1080.0
 texture = SubResource("GradientTexture1D_ynf5e")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Borders" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="LeftBorder" type="TextureRect" parent="Borders"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 64.0
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hptm8")
+
+[node name="RightBorder" type="TextureRect" parent="Borders"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_d1ilt")
+
+[node name="TopBorder" type="TextureRect" parent="Borders"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_6iyac")
+
+[node name="BottomBorder" type="TextureRect" parent="Borders"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_fdnlq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_kry3j")
@@ -793,6 +857,23 @@ shape = SubResource("CircleShape2D_21xkr")
 
 [node name="ExitDoor" parent="Shops/KFC" instance=ExtResource("5_kry3j")]
 position = Vector2(-4, 4)
+
+[node name="Vietnamec" parent="Shops" instance=ExtResource("4_jjvhh")]
+position = Vector2(1362, 894)
+visitor_color = Color(1, 0.141176, 0.337255, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shops/Vietnamec"]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_21xkr")
+
+[node name="ExitDoor" parent="Shops/Vietnamec" instance=ExtResource("5_kry3j")]
+position = Vector2(-13, -16)
+
+[node name="ExitDoor2" parent="Shops/Vietnamec" instance=ExtResource("5_kry3j")]
+position = Vector2(-22, -5)
+
+[node name="ExitDoor3" parent="Shops/Vietnamec" instance=ExtResource("5_kry3j")]
+position = Vector2(3, -20)
 
 [node name="Kebab" parent="Shops" instance=ExtResource("4_jjvhh")]
 position = Vector2(1426, 353)
