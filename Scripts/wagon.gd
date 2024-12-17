@@ -10,5 +10,5 @@ func _ready() -> void:
 	wagon_index = locomotive.number_of_wagons
 	locomotive.number_of_wagons += 1
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	progress = locomotive.progress - (wagon_index + 1) * wagon_length_px
