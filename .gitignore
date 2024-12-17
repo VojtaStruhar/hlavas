@@ -5,3 +5,9 @@
 build/*
 !build/deploy.sh
 .DS_Store
+# Ignore video files related to the submission
+*.drp
+*.mov
+*.m4a
+*.mp3
+*.mov
