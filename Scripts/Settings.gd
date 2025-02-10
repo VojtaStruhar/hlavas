@@ -11,3 +11,5 @@ var background_photo: bool = false:
 	set(v):
 		background_photo = v
 		background_photo_updated.emit()
+
+var background_opacity: float = 0.6

@@ -52,6 +52,7 @@ script/source = "extends CanvasLayer
 @onready var fps_label: Label = %FPSLabel
 @onready var background_check_box: CheckBox = %BackgroundCheckBox
 @onready var colored_people_checkbox: CheckBox = %ColoredPeopleCheckbox
+@onready var opacity_h_slider: HSlider = %OpacityHSlider
 
 
 @onready var bw_image = $\"../UnderlyingPhoto/BrnoBlackAndWhite\"
@@ -68,6 +69,9 @@ func _ready() -> void:
 	
 	background_check_box.toggled.connect(_on_background_check_box_toggled)
 	colored_people_checkbox.toggled.connect(_on_colored_people_checkbox_toggled)
+	
+	opacity_h_slider.value = Settings.background_opacity
+	opacity_h_slider.value_changed.connect(func(v): Settings.background_opacity = v)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(\"toggle_options\"):
@@ -103,7 +107,7 @@ func _ready() -> void:
 func _toggle_bg() -> void:
 	bg_visible = not bg_visible
 	var t = create_tween()
-	t.tween_property(bg, \"modulate:a\", 0.15 if bg_visible else 0.0, 5.0).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(bg, \"modulate:a\", Settings.background_opacity if bg_visible else 0.0, 5.0).set_ease(Tween.EASE_IN_OUT)
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gwhlx"]
@@ -454,6 +458,22 @@ text = "Background photo"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Colored dots"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Background opacity"
+
+[node name="OpacityHSlider" type="HSlider" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
 
 [node name="UnderlyingPhoto" type="Node2D" parent="."]
 metadata/_edit_group_ = true
