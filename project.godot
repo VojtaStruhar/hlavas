@@ -11,10 +11,11 @@ config_version=5
 [application]
 
 config/name="Hlavas"
+config/description="Simulation of people walking around Brno's main train station. Trains and trams are bringing people in and out."
 config/tags=PackedStringArray("project")
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dphn506aij1fh"
 
 [autoload]
 
@@ -53,3 +54,8 @@ toggle_options={
 2d_physics/layer_2="Point of interest"
 2d_navigation/layer_2="Podzemi"
 2d_physics/layer_3="Train"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
