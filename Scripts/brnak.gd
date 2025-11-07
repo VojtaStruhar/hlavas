@@ -15,7 +15,7 @@ var movement_delta: float
 func _ready() -> void:
 	SPEED += randi_range(-3, 3)
 	goal = PlacesManager.get_random()
-	agent.velocity_computed.connect(Callable(_on_velocity_computed))
+	agent.velocity_computed.connect(_on_velocity_computed)
 	Settings.colored_people_updated.connect(update_modulate)
 	
 	if goal:

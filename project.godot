@@ -13,7 +13,7 @@ config_version=5
 config/name="Hlavas"
 config/tags=PackedStringArray("project")
 run/main_scene="res://Scenes/main.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -30,8 +30,8 @@ window/stretch/mode="canvas_items"
 
 [editor]
 
-movie_writer/mjpeg_quality=0.9
 movie_writer/movie_file="submission/capture.avi"
+movie_writer/mjpeg_quality=0.9
 
 [global_group]
 
